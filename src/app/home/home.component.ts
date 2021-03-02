@@ -6,16 +6,22 @@ import { UserService, AuthenticationService } from '@app/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
-    loading = false;
-    users: User[];
+  loading = false;
+  user: User;
+  userFromApi: User;
 
-    constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.user = this.authenticationService.userValue;
+  }
 
-    ngOnInit() {
-        this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.loading = false;
-            this.users = users;
-        });
-    }
+  ngOnInit(): void {
+    this.loading = true;
+    this.userService.getById(this.user.id).pipe(first()).subscribe(user => {
+      this.loading = false;
+      this.userFromApi = user;
+    });
+  }
 }

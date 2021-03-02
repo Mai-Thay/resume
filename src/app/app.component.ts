@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './_services';
 import { User } from './_models';
 
+// tslint:disable-next-line:component-selector
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
+
 export class AppComponent {
     currentUser: User;
 
@@ -12,10 +14,10 @@ export class AppComponent {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
-        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        this.authenticationService.user.subscribe(x => this.currentUser = x);
     }
 
-    logout() {
+    logout(): void {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
     }

@@ -3,9 +3,9 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-import { User } from '@app/_models';
-
-const users: User[] = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+import {users} from '../_mocks';
+import {Role} from '../_enums';
+import {User} from '../_models';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -15,64 +15,100 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null)
             .pipe(mergeMap(handleRoute))
-            .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+            .pipe(materialize())
             .pipe(delay(500))
             .pipe(dematerialize());
 
-        function handleRoute() {
+        function handleRoute(): Observable<HttpEvent<any>> {
             switch (true) {
                 case url.endsWith('/users/authenticate') && method === 'POST':
                     return authenticate();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
+                case url.match(/\/users\/\d+$/) && method === 'GET':
+                    return getUserById();
                 default:
-                    // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            }
         }
 
-        // route functions
-
-        function authenticate() {
+        function authenticate(): Observable<HttpEvent<any>>  {
             const { username, password } = body;
             const user = users.find(x => x.username === username && x.password === password);
-            if (!user) return error('Username or password is incorrect');
+            if (!user) {
+              return error('Username or password is incorrect');
+            }
             return ok({
                 id: user.id,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                token: 'fake-jwt-token'
-            })
+                role: user.role,
+                token: `fake-jwt-token-${user.id}`
+            });
         }
 
-        function getUsers() {
-            if (!isLoggedIn()) return unauthorized();
+        function getUsers(): Observable<HttpEvent<any>> {
+            if (!isAdmin()) {
+              return unauthorized();
+            }
             return ok(users);
         }
 
-        // helper functions
+        function getUserById(): Observable<HttpEvent<any>> {
+            if (!isLoggedIn()) {
+                return unauthorized();
+            }
 
-        function ok(body?) {
-            return of(new HttpResponse({ status: 200, body }))
+            // only admins can access other user records
+            if (!isAdmin() && currentUser().id !== idFromUrl()) {
+                return unauthorized();
+            }
+
+            const user = users.find(x => x.id === idFromUrl());
+            return ok(user);
         }
 
-        function error(message) {
+        function isAdmin(): boolean {
+            return isLoggedIn() && currentUser().role === Role.Admin;
+        }
+
+        function currentUser(): User | null {
+            if (!isLoggedIn()) {
+              return;
+            }
+            // tslint:disable-next-line:radix
+            const id = parseInt(headers.get('Authorization').split('-').reverse()[0]);
+            return users.find(x => x.id === id);
+        }
+
+        // tslint:disable-next-line:no-shadowed-variable
+        function ok(body: object | null): Observable<HttpEvent<any>> {
+            return of(new HttpResponse({ status: 200, body }));
+        }
+
+        function error(message): Observable<never> {
             return throwError({ error: { message } });
         }
 
-        function unauthorized() {
+        function unauthorized(): Observable<never> {
             return throwError({ status: 401, error: { message: 'Unauthorised' } });
         }
 
-        function isLoggedIn() {
-            return headers.get('Authorization') === 'Bearer fake-jwt-token';
+        function isLoggedIn(): boolean {
+          const authHeader = headers.get('Authorization') || '';
+          return authHeader.startsWith('Bearer fake-jwt-token');
+        }
+
+        function idFromUrl(): number {
+            const urlParts = url.split('/');
+            // tslint:disable-next-line:radix
+            return parseInt(urlParts[urlParts.length - 1]);
         }
     }
 }
 
 export let fakeBackendProvider = {
-    // use fake backend in place of Http service for backend-less development
     provide: HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
     multi: true

@@ -3,13 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// used to create fake backend
 import { fakeBackendProvider } from './_helpers';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor, ErrorInterceptor } from './_interceptors';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 
@@ -34,4 +31,5 @@ import { LoginComponent } from './login';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}
