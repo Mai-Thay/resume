@@ -1,21 +1,33 @@
-﻿import { NgModule } from '@angular/core';
+﻿/**
+ * ## AppModule
+ * @packageDocumentation
+ * @module AppModule
+ * @preferred
+ */
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { fakeBackendProvider } from './_helpers';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { JwtInterceptor, ErrorInterceptor } from './_interceptors';
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
+import { fakeBackendProvider } from '@app/_helpers';
+import { AppComponent } from '@app/app.component';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { JwtInterceptor, ErrorInterceptor } from '@app/_interceptors';
+import { HomeComponent } from '@app/home';
+import { LoginComponent } from '@app/login';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DtTableModule } from 'ngx-dt-table';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        TagInputModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DtTableModule
     ],
     declarations: [
         AppComponent,
@@ -32,4 +44,7 @@ import { LoginComponent } from './login';
     bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+/**
+ * ## Главный модуль
+ */
+export class AppModule { }

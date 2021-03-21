@@ -1,1 +1,7 @@
-﻿export * from './home.component';
+﻿/**
+ * ## HomePage
+ * @packageDocumentation
+ * @module HomePage
+ * @preferred
+ */
+export * from './home.component';

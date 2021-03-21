@@ -1,22 +1,20 @@
-﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+﻿<div class="wrapper" [style.background-image]="bg">
+  <!-- nav -->
+  <header class="header-opacity d-flex flex-row p-3 align-items-center justify-content-between" *ngIf="currentUser">
+    <div class="d-flex">
+      <h2 class="text-white" *ngIf="isAdmin; else user">Список резюме</h2>
+      <ng-template #user>
+        <h2 class="text-white">Мое резюме</h2>
+      </ng-template>
     </div>
-</nav>
+    <div class="d-flex">
+      <a class="text-white font-weight-bold mr-4" *ngIf="isAdmin" routerLink="/resume">Мое резюме</a>
+      <a class="text-white font-weight-bold" (click)="logout()">Выйти</a>
+    </div>
+  </header>
 
-<!-- main app container -->
-<div class="container">
+  <!-- main app container -->
+  <div class="container">
     <router-outlet></router-outlet>
-</div>
-
-<!-- credits -->
-<div class="text-center mt-4">
-    <p>
-        <a href="https://jasonwatmore.com/post/2020/07/09/angular-10-jwt-authentication-example-tutorial" target="_top">Angular 10 - JWT Authentication Example & Tutorial</a>
-    </p>
-    <p>
-        <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-    </p>
+  </div>
 </div>

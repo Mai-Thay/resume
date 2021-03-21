@@ -1,16 +1,24 @@
-﻿import { Component, OnInit } from '@angular/core';
+/**
+ * @packageDocumentation
+ * @module Login
+ */
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { AuthenticationService } from '@app/_services';
 
+/**
+ * Форма авторизации
+ * [[include:22.md]]
+ */
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
     submitted = false;
     error = '';
+
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f(): any { return this.loginForm.controls; }
+    get formFields(): any { return this.loginForm.controls; }
 
     onSubmit(): null {
         this.submitted = true;
@@ -42,7 +50,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        this.authenticationService.login(this.formFields.username.value, this.formFields.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {

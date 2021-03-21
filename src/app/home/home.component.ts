@@ -1,27 +1,54 @@
-﻿import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
+/**
+ * @packageDocumentation
+ * @module HomePage
+ */
+import {Component, OnInit} from '@angular/core';
+import {User, Resume, Tag, Profile, Pagination, ResumeFilter} from '@app/_models';
+import {ResumesService, AuthenticationService, TagsService, ProfilesService} from '@app/_services';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
-import { User } from '@app/_models';
-import { UserService, AuthenticationService } from '@app/_services';
-
+/** ## Домашняя страница
+ * [[include:11.md]]
+ */
 @Component({ templateUrl: 'home.component.html' })
-export class HomeComponent {
-  loading = false;
+export class HomeComponent implements OnInit {
+  filterForm: FormGroup;
   user: User;
-  userFromApi: User;
+  resumes: Resume[] = [];
+  tags: Tag[];
+  profiles: Profile[];
 
   constructor(
-    private userService: UserService,
-    private authenticationService: AuthenticationService
+    private formBuilder: FormBuilder,
+    private profilesService: ProfilesService,
+    private resumesService: ResumesService,
+    private tagsService: TagsService,
+    private authenticationService: AuthenticationService,
+    public resumesPagination: Pagination,
+    public resumesFilter: ResumeFilter
   ) {
     this.user = this.authenticationService.userValue;
   }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.userService.getById(this.user.id).pipe(first()).subscribe(user => {
-      this.loading = false;
-      this.userFromApi = user;
+    this.resumesService.getList(this.resumesPagination).subscribe((result: Resume[]) => {
+      this.resumesPagination.isLoading = false;
+      this.resumes = result;
     });
+    this.tagsService.getList().subscribe((result: Tag[]) => {
+      this.tags = result;
+    });
+    this.profilesService.getList().subscribe((result: Profile[]) => {
+      this.profiles = result;
+    });
+
+    this.filterForm = this.formBuilder.group({
+      profile: [''],
+      tags: ['']
+    });
+  }
+
+  onSubmit(): void {
+
   }
 }

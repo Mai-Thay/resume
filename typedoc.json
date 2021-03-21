@@ -1,0 +1,12 @@
+{
+  "out": "./docs",
+  "theme": "default",
+  "exclude": ["**/*+(.spec|.e2e).ts","**/_mocks/*", "**/environments/*"],
+  "readme": "./README.md",
+  "media": "./src/assets/screens",
+  "categorizeByGroup": true,
+  "includes": "./includes",
+  "name": "Angular 11 - база резюме сотрудников компании",
+  "hideGenerator": true,
+  "disableSources": false
+}

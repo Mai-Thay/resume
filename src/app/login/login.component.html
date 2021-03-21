@@ -1,31 +1,27 @@
-﻿<div class="col-md-6 offset-md-3 mt-5">
-    <div class="alert alert-info">
-        Username: test<br />
-        Password: test
-    </div>
-    <div class="card">
-        <h4 class="card-header">Angular 10 JWT Login Example</h4>
-        <div class="card-body">
+<div class="col-md-6 offset-md-3 d-flex min-vh-100">
+    <div class="card card-opacity mt-auto mb-auto vw-100">
+        <h1 class="card-header text-white p-5">Авторизация</h1>
+        <div class="card-body p-5">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
+                    <label for="username" class="text-monospace text-white">Логин</label>
+                    <input id="username" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
+                    <div *ngIf="submitted && formFields.username.errors" class="invalid-feedback">
+                        <div *ngIf="formFields.username.errors.required">Логин обязателен</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    <label for="password" class="text-monospace text-white">Пароль</label>
+                    <input id="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }" />
+                    <div *ngIf="submitted && formFields.password.errors" class="invalid-feedback">
+                        <div *ngIf="formFields.password.errors.required">Пароль обязателен</div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
+                <div *ngIf="error" class="text-danger fs-80">{{error}}</div>
+                <button [disabled]="loading" class="btn btn-block btn-secondary text-monospace text-uppercase btn-lg mt-5">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm  mr-1"></span>
+                    Войти
                 </button>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
         </div>
     </div>

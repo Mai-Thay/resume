@@ -1,13 +1,33 @@
-﻿﻿<div class="card mt-4">
-  <h4 class="card-header">Home</h4>
+<div class="card mt-4">
+  <h4 class="card-header">Настройки фильтрации</h4>
   <div class="card-body">
-    <p>You're logged in with Angular 10 & JWT!!</p>
-    <p>Your role is: <strong>{{user.role}}</strong>.</p>
-    <p>This page can be accessed by <u>all authenticated users</u>.</p>
-    <p class="mb-1">Current user from secure api end point:</p>
-    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-    <ul *ngIf="userFromApi">
-      <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
-    </ul>
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="profile">Выберите направление разработки: </label>
+      <select id="profile" formControlName="profile"  class="browser-default custom-select">
+        <option value="">Выберите направление</option>
+        <option *ngFor="let option of this.profiles" [value]="option.code">{{ option.text }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="tags">Выберите ключевые навыки технологии: </label>
+      <tag-input id="tags" formControlName="tags" [placeholder]="'+ добавить еще'" [secondaryPlaceholder]="'Начните вводить текст'">
+        <tag-input-dropdown [autocompleteItems]="tags">
+        </tag-input-dropdown>
+      </tag-input>
+    </div>
+    </form>
+  </div>
+  <h4 class="card-header">Список резюме</h4>
+  <div class="card-body">
+    <dt-table [data]="resumes" [loading]="resumesPagination.isLoading">
+      <mat-progress-bar *dtLoading mode="indeterminate"></mat-progress-bar>
+      <dt-column field="id" header="Id"></dt-column>
+      <dt-column header="Name">
+        <div *dtCell="let resume">
+          {{resume.getFIO()}}
+        </div>
+      </dt-column>
+    </dt-table>
   </div>
 </div>
