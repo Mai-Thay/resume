@@ -1,0 +1,534 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LoginComponent | Angular 11 - база резюме сотрудников компании</title>
+	<meta name="description" content="Documentation for Angular 11 - база резюме сотрудников компании">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Angular 11 - база резюме сотрудников компании</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/login.html">Login</a>
+				</li>
+				<li>
+					<a href="login.logincomponent-1.html">LoginComponent</a>
+				</li>
+			</ul>
+			<h1>Class LoginComponent</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Форма авторизации</p>
+						<a href="#компонент" id="компонент" style="color: inherit; text-decoration: none;">
+							<h3>Компонент</h3>
+						</a>
+						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/login/login.component.ts</span>
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@packageDocumentation</span>
+ * <span class="hljs-doctag">@module <span class="hljs-variable">Login</span></span>
+ */</span>
+<span class="hljs-keyword">import</span> { Component, OnInit } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
+<span class="hljs-keyword">import</span> { Router, ActivatedRoute } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/router&#x27;</span>;
+<span class="hljs-keyword">import</span> { FormBuilder, FormGroup, Validators } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/forms&#x27;</span>;
+<span class="hljs-keyword">import</span> { first } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/operators&#x27;</span>;
+<span class="hljs-keyword">import</span> { AuthenticationService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_services&#x27;</span>;
+
+<span class="hljs-comment">/**
+ * Форма авторизации
+ * [[include:22.md]]
+ */</span>
+<span class="hljs-meta">@Component</span>({ <span class="hljs-attr">templateUrl</span>: <span class="hljs-string">&#x27;login.component.html&#x27;</span> })
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnInit</span> </span>{
+    <span class="hljs-attr">loginForm</span>: FormGroup;
+    loading = <span class="hljs-literal">false</span>;
+    submitted = <span class="hljs-literal">false</span>;
+    error = <span class="hljs-string">&#x27;&#x27;</span>;
+
+
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">
+        <span class="hljs-keyword">private</span> formBuilder: FormBuilder,
+        <span class="hljs-keyword">private</span> route: ActivatedRoute,
+        <span class="hljs-keyword">private</span> router: Router,
+        <span class="hljs-keyword">private</span> authenticationService: AuthenticationService
+    </span>)</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.authenticationService.userValue) {
+            <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/&#x27;</span>]);
+        }
+    }
+
+    ngOnInit(): <span class="hljs-built_in">void</span> {
+        <span class="hljs-built_in">this</span>.loginForm = <span class="hljs-built_in">this</span>.formBuilder.group({
+            <span class="hljs-attr">username</span>: [<span class="hljs-string">&#x27;&#x27;</span>, Validators.required],
+            <span class="hljs-attr">password</span>: [<span class="hljs-string">&#x27;&#x27;</span>, Validators.required]
+        });
+    }
+
+    <span class="hljs-comment">// convenience getter for easy access to form fields</span>
+    <span class="hljs-keyword">get</span> <span class="hljs-title">formFields</span>(): <span class="hljs-title">any</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.loginForm.controls; }
+
+    onSubmit(): <span class="hljs-literal">null</span> {
+        <span class="hljs-built_in">this</span>.submitted = <span class="hljs-literal">true</span>;
+
+        <span class="hljs-comment">// stop here if form is invalid</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.loginForm.invalid) {
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-built_in">this</span>.loading = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">this</span>.authenticationService.login(<span class="hljs-built_in">this</span>.formFields.username.value, <span class="hljs-built_in">this</span>.formFields.password.value)
+            .pipe(first())
+            .subscribe({
+                <span class="hljs-attr">next</span>: <span class="hljs-function">() =&gt;</span> {
+                    <span class="hljs-comment">// get return url from route parameters or default to &#x27;/&#x27;</span>
+                    <span class="hljs-keyword">const</span> returnUrl = <span class="hljs-built_in">this</span>.route.snapshot.queryParams.returnUrl || <span class="hljs-string">&#x27;/&#x27;</span>;
+                    <span class="hljs-built_in">this</span>.router.navigate([returnUrl]);
+                },
+                <span class="hljs-attr">error</span>: <span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                    <span class="hljs-built_in">this</span>.error = error;
+                    <span class="hljs-built_in">this</span>.loading = <span class="hljs-literal">false</span>;
+                }
+            });
+    }
+}
+</code></pre>
+						<a href="#шаблон-компонента" id="шаблон-компонента" style="color: inherit; text-decoration: none;">
+							<h3>Шаблон компонента</h3>
+						</a>
+						<pre><code class="language-html"><span class="hljs-comment">&lt;!-- ../src/app/login/login.component.html --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-6 offset-md-3 d-flex min-vh-100&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card card-opacity mt-auto mb-auto vw-100&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-header text-white p-5&quot;</span>&gt;</span>Авторизация<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body p-5&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">form</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">&quot;loginForm&quot;</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">&quot;onSubmit()&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-monospace text-white&quot;</span>&gt;</span>Логин<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">&quot;{ &#x27;is-invalid&#x27;: submitted &amp;&amp; formFields.username.errors }&quot;</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;submitted &amp;&amp; formFields.username.errors&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;invalid-feedback&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;formFields.username.errors.required&quot;</span>&gt;</span>Логин обязателен<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-monospace text-white&quot;</span>&gt;</span>Пароль<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">&quot;{ &#x27;is-invalid&#x27;: submitted &amp;&amp; formFields.password.errors }&quot;</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;submitted &amp;&amp; formFields.password.errors&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;invalid-feedback&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;formFields.password.errors.required&quot;</span>&gt;</span>Пароль обязателен<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;error&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-danger fs-80&quot;</span>&gt;</span>{{error}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">&quot;loading&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-block btn-secondary text-monospace text-uppercase btn-lg mt-5&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;loading&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;spinner-border spinner-border-sm  mr-1&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    Войти
+                <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">LoginComponent</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">OnInit</span></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="login.logincomponent-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="login.logincomponent-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="login.logincomponent-1.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="login.logincomponent-1.html#formbuilder" class="tsd-kind-icon">form<wbr>Builder</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="login.logincomponent-1.html#loading" class="tsd-kind-icon">loading</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="login.logincomponent-1.html#loginform" class="tsd-kind-icon">login<wbr>Form</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="login.logincomponent-1.html#route" class="tsd-kind-icon">route</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="login.logincomponent-1.html#router" class="tsd-kind-icon">router</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="login.logincomponent-1.html#submitted" class="tsd-kind-icon">submitted</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="login.logincomponent-1.html#formfields" class="tsd-kind-icon">form<wbr>Fields</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="login.logincomponent-1.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="login.logincomponent-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Login<wbr>Component<span class="tsd-signature-symbol">(</span>formBuilder<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormBuilder</span>, route<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ActivatedRoute</span>, router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, authenticationService<span class="tsd-signature-symbol">: </span><a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="login.logincomponent-1.html" class="tsd-signature-type">LoginComponent</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/login/login.component.ts:20</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>formBuilder: <span class="tsd-signature-type">FormBuilder</span></h5>
+								</li>
+								<li>
+									<h5>route: <span class="tsd-signature-type">ActivatedRoute</span></h5>
+								</li>
+								<li>
+									<h5>router: <span class="tsd-signature-type">Router</span></h5>
+								</li>
+								<li>
+									<h5>authenticationService: <a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="login.logincomponent-1.html" class="tsd-signature-type">LoginComponent</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="authenticationservice" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> authentication<wbr>Service</h3>
+					<div class="tsd-signature tsd-kind-icon">authentication<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:27</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:20</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="formbuilder" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> form<wbr>Builder</h3>
+					<div class="tsd-signature tsd-kind-icon">form<wbr>Builder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormBuilder</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:24</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="loading" class="tsd-anchor"></a>
+					<h3>loading</h3>
+					<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="loginform" class="tsd-anchor"></a>
+					<h3>login<wbr>Form</h3>
+					<div class="tsd-signature tsd-kind-icon">login<wbr>Form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormGroup</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:17</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="route" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> route</h3>
+					<div class="tsd-signature tsd-kind-icon">route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ActivatedRoute</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:25</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="router" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> router</h3>
+					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:26</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="submitted" class="tsd-anchor"></a>
+					<h3>submitted</h3>
+					<div class="tsd-signature tsd-kind-icon">submitted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/app/login/login.component.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="formfields" class="tsd-anchor"></a>
+					<h3>form<wbr>Fields</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> formFields<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/login/login.component.ts:42</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ngoninit" class="tsd-anchor"></a>
+					<h3>ng<wbr>OnInit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">ng<wbr>OnInit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/login/login.component.ts:34</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onsubmit" class="tsd-anchor"></a>
+					<h3>on<wbr>Submit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Submit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/app/login/login.component.ts:44</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/appmodule.html">App<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/enums.html">Enums</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/guards.html">Guards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/helpers.html">Helpers</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/homepage.html">Home<wbr>Page</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/interceptors.html">Interceptors</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/login.html">Login</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/services.html">Services</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/login.html#logincomponent" class="tsd-kind-icon">Login<wbr>Component</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="login.logincomponent-1.html" class="tsd-kind-icon">Login<wbr>Component</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="login.logincomponent-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#error" class="tsd-kind-icon">error</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="login.logincomponent-1.html#formbuilder" class="tsd-kind-icon">form<wbr>Builder</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#loading" class="tsd-kind-icon">loading</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#loginform" class="tsd-kind-icon">login<wbr>Form</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="login.logincomponent-1.html#route" class="tsd-kind-icon">route</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="login.logincomponent-1.html#router" class="tsd-kind-icon">router</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#submitted" class="tsd-kind-icon">submitted</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#formfields" class="tsd-kind-icon">form<wbr>Fields</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#ngoninit" class="tsd-kind-icon">ng<wbr>OnInit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="login.logincomponent-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
