@@ -8,7 +8,7 @@ import { AuthenticationService } from '@app/_services';
 
 /**
  * ## AuthGuard
- * Ограничение достпа с маршрутам по признаку авторизованности пользователя
+ * Ограничение доступа к маршрутам по признаку авторизованности пользователя
  * [[include:8.md]]
  */
 @Injectable({ providedIn: 'root' })

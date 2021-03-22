@@ -90,40 +90,28 @@
 				<p>Команда для импорта кода компонентов в файлы .md:</p>
 				<pre><code class="language-bash">npx embedme includes/*.md
 </code></pre>
-				<p>Для того чтоб создать файл с разметкой аналогичной коду в компоненте или шаблоне, необходимо доьавить в диракторию /includes файд someMame.md</p>
-				<p>В файле роазмещается любая маркдаун размента, а так же для импорта кода используются слудющие конструкции:</p>
-				<pre><code>```ts
-<span class="hljs-regexp">//</span> ..<span class="hljs-regexp">/src/</span>app<span class="hljs-regexp">/_models/</span>resumeFilter.ts
-</code></pre>
-				<p>Путь  в нужному фaйл у указывается относительно директории includes, в которой лежать все вспомогательные файлы разметки. Чтоб подключить разметку в документацию, импользуйте следующую конструкцию:</p>
-				<pre><code class="language-ts"><span class="hljs-comment">/** ## Список резюме с потсраничной разбивкой (модель ответа от севера)
- * ```ts
-// ../src/app/_models/pagedResumesResponse.ts
+				<p>Для того чтоб создать файл с разметкой аналогичной коду в компоненте или шаблоне, необходимо добавить в диракторию /includes файд someMame.md</p>
+				<p>В файле роазмещается любая маркдаун размента, а так же для импорта кода используются следующие конструкции:</p>
+				<p>```ts
+					// ../src/app/_models/resumeFilter.ts
+				``` </p>
+				<p>Путь  в нужному фaйлe указывается относительно директории includes, в которой лежать все вспомогательные файлы разметки. Чтоб подключить разметку в документацию, импользуйте следующую конструкцию:</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/profile.ts</span>
 
-/**
+<span class="hljs-comment">/**
  * <span class="hljs-doctag">@packageDocumentation</span>
  * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
  */</span>
-<span class="hljs-keyword">import</span> { Type } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;
-<span class="hljs-keyword">import</span> { Resume } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./resume&#x27;</span>;
-<span class="hljs-comment">/** ## Список резюме с потсраничной разбивкой (модель ответа от севера)
- * [[include:1.md]]
+
+<span class="hljs-comment">/**
+ * ## Направление, в котором работает программист
+ * [[include:3.md]]
  */</span>
-<span class="hljs-keyword">export</span>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PagedResumesResponse</span> </span>{
-  <span class="hljs-comment">/** Всего элесентов */</span>
-  <span class="hljs-attr">total</span>: <span class="hljs-built_in">number</span>;
-  <span class="hljs-comment">/** Номер текущей страницы */</span>
-  page: <span class="hljs-built_in">number</span>;
-  <span class="hljs-comment">/** Элементов на странице */</span>
-  perPage: <span class="hljs-built_in">number</span>;
-  <span class="hljs-meta">@Type</span>(<span class="hljs-function">() =&gt;</span> Resume)
-  <span class="hljs-comment">/** Массив элементов */</span>
-  <span class="hljs-attr">items</span>: Resume[];
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Profile</span> </span>{
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
+  code: <span class="hljs-built_in">string</span>;
+  text: <span class="hljs-built_in">string</span>;
 }
-</code></pre>
-				<p> */
-				export  class PagedResumesResponse {}</p>
-				<pre><code>
 </code></pre>
 			</div>
 		</div>
