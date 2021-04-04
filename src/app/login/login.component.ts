@@ -12,7 +12,7 @@ import { AuthenticationService } from '@app/_services';
  * Форма авторизации
  * [[include:22.md]]
  */
-@Component({ templateUrl: 'login.component.html' })
+@Component({ templateUrl: './login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;

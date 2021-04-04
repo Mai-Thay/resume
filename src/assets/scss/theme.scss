@@ -1,14 +1,15 @@
 body, html {
   display: flex;
-  height: 100%;
+  min-height: 100%;
   flex: 1;
   align-items: stretch;
   flex-direction: column;
 }
 
 app, .wrapper {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
   background-size: cover;
 }
 
@@ -23,3 +24,101 @@ app, .wrapper {
     font-size: 80%;
   }
 }
+
+.height-auto {
+  height: auto !important;
+  min-height: 500px;
+
+  cdk-virtual-scroll-viewport {
+
+  }
+}
+
+.sortable {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.desc:after {
+  content: '\21D3';
+}
+
+.asc:after {
+  content: '\21D1';
+}
+$width: () !default;
+$width: map-merge(
+    (
+      "100": 100%,
+      "80":  80%,
+      "60":  60%,
+      "50":  50%,
+      "40":  40%,
+      "20":  20%,
+      "10":  10%,
+      "5":  5%,
+    ),
+    $width
+);
+
+@mixin make-width($d) {
+  width: $d;
+}
+
+@each $w, $p in $width {
+  .w-#{$w} {
+    @include make-width($p);
+  }
+}
+
+.ng2-tag-input {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0 0.25rem !important;
+
+  &.ng2-tag-input--focused {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-bottom: 1px solid #ced4da !important;
+  }
+}
+
+tag-input#tags {
+  .ng2-tag-input__text-input {
+    height: 36px;
+  }
+  tag {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 24px;
+    border-radius: 0.2rem;
+
+    .ng2-tag-input__text-input {
+      height: 36px;
+    }
+
+    .tag-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    delete-icon {
+      height: 24px;
+      &:before {
+        content: '⨯';
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: bold;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+

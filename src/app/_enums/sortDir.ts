@@ -7,7 +7,7 @@
  * ## Направление сортировки
  */
 export enum SortDir {
-  asc = 'ASC',
-  desc = 'DESC',
+  asc = 'asc',
+  desc = 'desc',
 }
 

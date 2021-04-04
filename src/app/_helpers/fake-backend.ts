@@ -74,6 +74,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         total: resumes.length,
         page: Number(request.params.get('page')) || 1,
         perPage: Number(request.params.get('perPage')) || resumes.length,
+        sortBy: request.params.get('sortBy') || null,
+        sortDir: request.params.get('sortDir') || null,
+        tags: (request.params.getAll('tags') || []).map(e => Number(e)),
+        profile: Number(request.params.get('profile')) || null,
         items: []
       };
 
@@ -81,12 +85,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return unauthorized();
       }
 
-      result.items = resumes.slice((result.page - 1) * result.perPage, result.perPage * result.page).map(e => ({
+      let resumesCombined = resumes.map(e => ({
         ...e,
         user: users.find(x => x.id === e.userId),
         tags: tags.filter(x => e.tagsId.includes(x.id)),
         profile: profiles.find(x => x.id === e.profileId)
       }));
+
+      if (result.tags.length) {
+        resumesCombined = resumesCombined.filter(r => {
+          return !!r.tagsId.filter(e => {
+            return result.tags.includes(e);
+          }).length;
+        });
+      }
+
+      if (result.profile) {
+        resumesCombined = resumesCombined.filter(r => r.profileId === result.profile);
+      }
+
+      switch (result.sortBy) {
+        case 'id':
+          resumesCombined.sort((a, b) => {
+            return sort(a.id, b.id, result.sortDir);
+          });
+          break;
+        case 'fio':
+          resumesCombined.sort((a, b) => {
+            return sort(
+              `${a.lastName} ${a.name[0]}. ${a.secondName[0]}.`,
+              `${b.lastName} ${b.name[0]}. ${b.secondName[0]}.`,
+              result.sortDir
+            );
+          });
+          break;
+        case 'profile':
+          resumesCombined.sort((a, b) => {
+            return sort(a.profile.text, b.profile.text, result.sortDir);
+          });
+          break;
+        default:
+          resumesCombined.sort((a, b) => {
+            return a.id - b.id;
+          });
+          break;
+      }
+
+      result.total = resumesCombined.length;
+
+      result.items = resumesCombined.slice((result.page - 1) * result.perPage, result.perPage * result.page);
 
       return ok(result);
     }
@@ -181,6 +228,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const urlParts = url.split('/');
       // tslint:disable-next-line:radix
       return parseInt(urlParts[urlParts.length - 1]);
+    }
+
+    function sort(a, b, dir): number {
+      if ((a > b && dir === 'asc') || (a < b && dir === 'desc')) {
+        return 1;
+      }
+      if ((a > b && dir === 'desc') || (a < b && dir === 'asc')) {
+        return -1;
+      }
+      return 0;
     }
   }
 }

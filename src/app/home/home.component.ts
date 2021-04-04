@@ -3,23 +3,20 @@
  * @module HomePage
  */
 import {Component, OnInit} from '@angular/core';
-import {User, Resume, Tag, Profile, Pagination, ResumeFilter} from '@app/_models';
+import {User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesResponse} from '@app/_models';
 import {ResumesService, AuthenticationService, TagsService, ProfilesService} from '@app/_services';
-import {FormBuilder, FormGroup} from '@angular/forms';
 
 /** ## Домашняя страница
  * [[include:11.md]]
  */
-@Component({ templateUrl: 'home.component.html' })
+@Component({ templateUrl: './home.component.html' })
 export class HomeComponent implements OnInit {
-  filterForm: FormGroup;
   user: User;
   resumes: Resume[] = [];
   tags: Tag[];
   profiles: Profile[];
 
   constructor(
-    private formBuilder: FormBuilder,
     private profilesService: ProfilesService,
     private resumesService: ResumesService,
     private tagsService: TagsService,
@@ -31,24 +28,23 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.resumesService.getList(this.resumesPagination).subscribe((result: Resume[]) => {
-      this.resumesPagination.isLoading = false;
-      this.resumes = result;
-    });
+    this.resumesPagination.onChange = this.resumesFilter.onSubmit = () => this.getResumes();
+    this.getResumes();
     this.tagsService.getList().subscribe((result: Tag[]) => {
       this.tags = result;
     });
     this.profilesService.getList().subscribe((result: Profile[]) => {
       this.profiles = result;
     });
-
-    this.filterForm = this.formBuilder.group({
-      profile: [''],
-      tags: ['']
-    });
   }
 
-  onSubmit(): void {
-
+  getResumes(): void {
+    this.resumesPagination.isLoading = true;
+    this.resumesService.getList(this.resumesPagination, this.resumesFilter).subscribe((result: PagedResumesResponse) => {
+      this.resumesPagination.isLoading = false;
+      this.resumes = result.items;
+      this.resumesPagination.total = result.total;
+      this.resumesFilter.responseTags = result.tags;
+    });
   }
 }

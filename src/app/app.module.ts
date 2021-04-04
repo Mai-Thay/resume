@@ -17,6 +17,8 @@ import { LoginComponent } from '@app/login';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DtTableModule } from 'ngx-dt-table';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
     imports: [
@@ -27,7 +29,10 @@ import { DtTableModule } from 'ngx-dt-table';
         TagInputModule,
         BrowserAnimationsModule,
         FormsModule,
-        DtTableModule
+        DtTableModule,
+        NgbModule,
+        NgbPaginationModule,
+        NgxSkeletonLoaderModule
     ],
     declarations: [
         AppComponent,

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { environment } from '@environments/environment';
-import { Resume, ResumeFilter, Pagination, PagedResumesResponse } from '@app/_models';
+import { ResumeFilter, Pagination, PagedResumesResponse } from '@app/_models';
 import { Observable } from 'rxjs';
 import { BaseService } from '@app/_services/base.service';
 
@@ -15,13 +15,14 @@ import { BaseService } from '@app/_services/base.service';
  */
 @Injectable({ providedIn: 'root' })
 export class ResumesService extends BaseService {
-  getList(paging: Pagination = null, filter: ResumeFilter = null): Observable<Resume[]> {
+  getList(paging: Pagination = null, filter: ResumeFilter = null): Observable<PagedResumesResponse> {
     const options = {
       params: {...paging?.httpParams, ...filter?.httpParams}
     };
+    console.log(options)
     return this.http.get<PagedResumesResponse>(`${environment.apiUrl}/resumes`, options)
       .pipe(
-      map(response => plainToClass(Resume, response.items)),
+      map(response => plainToClass(PagedResumesResponse, response)),
       catchError(this.handleError('getResumes', []))
     );
   }

@@ -2,8 +2,8 @@
  * @packageDocumentation
  * @module Models
  */
-import { SortDir } from '@app/_enums';
-import { Injectable } from '@angular/core';
+import {SortDir} from '@app/_enums';
+import {Injectable} from '@angular/core';
 
 /** ## Параметры постраничной навигации и сортировки
  * [[include:2.md]]
@@ -11,21 +11,45 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class Pagination {
   /** Номер текущей страницы */
-  page = 1;
+  private $page = 1;
   /** Элементов на странице */
-  perPage = 5;
+  private $perPage = 10;
 
   /** Имя поля по которому должна осущетсвляться сортировка */
   sortBy?: string;
 
   /** Направление сотрировки */
-  sortDir?: keyof typeof SortDir;
+  sortDir?: SortDir;
 
   /** Общее количество элементов списка */
   total = 0;
 
    /** Идентификатор загрузки */
   isLoading = true;
+
+  /** Варианты отображения элементов на странице */
+  perPageVariants = [5, 10, 20, 30];
+
+  /** Коллбэк выполняемый при обновлении страницы/сортировки/колличества элементов на тсранице */
+  onChange = (): void => {};
+
+  get page(): number {
+    return this.$page;
+  }
+
+  set page(page: number) {
+    this.$page = page;
+    this.onChange();
+  }
+
+  get perPage(): number {
+    return this.$perPage;
+  }
+
+  set perPage(perPage: number) {
+    this.$perPage = perPage;
+    this.onChange();
+  }
 
   /** Собирает параметры для запроса */
   get httpParams(): {[param: string]: string | string[]} {
@@ -40,18 +64,32 @@ export class Pagination {
     return params;
   }
 
-  /** Переключает сортировку на противополодное направление */
-  public switchSort(): void {
-    if (!!this.sortDir && SortDir[this.sortDir] === SortDir.asc) {
-      this.sortDir = SortDir[SortDir.desc];
+  /** Переключает сортировку */
+  switchSort(sortBy: string): void {
+    if (this.sortBy !== sortBy) {
+      this.sortBy = sortBy;
+      this.sortDir = SortDir.asc;
     } else {
-      this.sortDir = SortDir[SortDir.asc];
+      this.sortDir = SortDir.desc === this.sortDir ? SortDir.asc : SortDir.desc;
     }
+    this.onChange();
   }
 
   /** Очищает параметры сорировки */
-  public clearSort(): void {
+  clearSort(): void {
     this.sortBy = null;
     this.sortDir = null;
+  }
+
+  /**
+   * Проверяет направление сортировки для заданного поля сортировки
+   * @param name
+   */
+  checkSortBy(name: string): string {
+    if (name === this.sortBy) {
+      return this.sortDir;
+    } else {
+      return '';
+    }
   }
 }

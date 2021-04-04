@@ -11,7 +11,7 @@ import { Role } from '@app/_enums';
 const IMAGE_PATH = '../assets/background/';
 
 // tslint:disable-next-line:component-selector
-@Component({ selector: 'app', templateUrl: 'app.component.html' })
+@Component({ selector: 'app', templateUrl: './app.component.html' })
 
 export class AppComponent {
     currentUser: User;
