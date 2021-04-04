@@ -1,11 +1,8 @@
-﻿<div class="wrapper" [style.background-image]="bg">
+﻿<div class="wrapper" [style.background]="bg">
   <!-- nav -->
   <header class="header-opacity d-flex flex-row p-3 align-items-center justify-content-between" *ngIf="currentUser">
     <div class="d-flex">
-      <h2 class="text-white" *ngIf="isAdmin; else user">Список резюме</h2>
-      <ng-template #user>
-        <h2 class="text-white">Мое резюме</h2>
-      </ng-template>
+      <h2 class="text-white">{{title}}</h2>
     </div>
     <div class="d-flex">
       <a class="text-white font-weight-bold mr-4" *ngIf="isAdmin" routerLink="/resume">Мое резюме</a>

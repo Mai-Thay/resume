@@ -11,12 +11,12 @@ import { Tag } from '@app/_models';
 @Injectable({ providedIn: 'root' })
 export class ResumeFilter {
   /** Id направления вкотором работает специалист */
-  profile?: number;
+  profile?: number = null;
   /** Массив тегов основных технологий по которым нужно фильтровать резбме */
-  tags?: Array<Tag>;
+  tags?: Array<Tag> = null;
 
   /** Массив ID тегов для подсветки */
-  responseTags?: Array<number>;
+  responseTags?: Array<number> = null;
 
   /** Выполнить по сабмиту */
   onSubmit = (): void => {};
@@ -36,5 +36,12 @@ export class ResumeFilter {
   /** Проверяем есть был ли тег добавлен только что, или по нему уже отфильтрованы значения */
   isInResponse(tag: Tag): boolean {
     return !!this.responseTags?.filter(t => t === tag.value).length;
+  }
+
+  clear(): void {
+    this.profile = null;
+    this.tags = null;
+    this.responseTags = null;
+    this.onSubmit();
   }
 }

@@ -2,27 +2,38 @@
  * @packageDocumentation
  * @module AppModule
  */
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import { AuthenticationService } from '@app/_services';
 import { User } from '@app/_models';
 import { Role } from '@app/_enums';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 const IMAGE_PATH = '../assets/background/';
 
-// tslint:disable-next-line:component-selector
-@Component({ selector: 'app', templateUrl: './app.component.html' })
+@Component({ selector: 'app-resume', templateUrl: './app.component.html' })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
     currentUser: User;
     bg: string;
+    title: string;
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private route: ActivatedRoute
     ) {
         this.authenticationService.user.subscribe(x => this.currentUser = x);
-        this.bg = `url(${IMAGE_PATH + Math.ceil((Math.random() * 7) + 1) + '.jpg'})`;
+    }
+
+    ngOnInit(): void {
+
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.bg = this.route.root.firstChild.snapshot.data?.colored ? `url(${IMAGE_PATH + Math.ceil((Math.random() * 7) + 1) + '.jpg'})` : 'rgba(0, 0, 0, 0.05)';
+        this.title = this.route.root.firstChild.snapshot.data.title;
+      });
     }
 
     isAdmin(): boolean {
@@ -33,4 +44,14 @@ export class AppComponent {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
     }
+
+  /**
+   * Проверка на соответсвие текущего роута определенному условию
+   *
+   * @param {string} route
+   * @returns
+   */
+  hasRoute(route: string): boolean {
+    return this.router.url.includes(route);
+  }
 }

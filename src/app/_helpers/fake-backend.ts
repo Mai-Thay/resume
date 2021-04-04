@@ -22,29 +22,31 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return of(null)
         .pipe(mergeMap(handleRoute))
         .pipe(materialize())
-        .pipe(delay(500))
+        .pipe(delay(1000))
         .pipe(dematerialize());
 
     /**
      * Обработка урлов входящих хапросов
      */
     function handleRoute(): Observable<HttpEvent<any>> {
-        switch (true) {
-            case url.endsWith('/users/authenticate') && method === 'POST':
-                return authenticate();
-            case url.endsWith('/users') && method === 'GET':
-                return getUsers();
-            case url.match(/\/users\/\d+$/) && method === 'GET':
-                return getUserById();
-            case url.match('/tags') && method === 'GET':
-                return getTags();
-            case url.match('/profiles') && method === 'GET':
-              return getProfiles();
-          case url.match('/resumes') && method === 'GET':
-            return getResumesList();
-            default:
-                return next.handle(request);
-        }
+      switch (true) {
+        case url.endsWith('/users/authenticate') && method === 'POST':
+          return authenticate();
+        case url.endsWith('/users') && method === 'GET':
+          return getUsers();
+        case url.match(/\/users\/\d+$/) && method === 'GET':
+          return getUserById();
+        case url.match('/tags') && method === 'GET':
+          return getTags();
+        case url.match('/profiles') && method === 'GET':
+          return getProfiles();
+        case url.match('/resumes') && method === 'GET':
+          return getResumesList();
+        case url.match('/resume') && method === 'GET':
+          return getResumeById();
+        default:
+          return next.handle(request);
+      }
     }
 
     /**
@@ -52,17 +54,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
      * @method POST
      */
     function authenticate(): Observable<HttpEvent<any>>  {
-        const { username, password } = body;
-        const user = users.find(x => x.username === username && x.password === password);
-        if (!user) {
-          return error('Не корректные логин или пароль');
-        }
-        return ok({
-            id: user.id,
-            username: user.username,
-            role: user.role,
-            token: `fake-jwt-token-${user.id}`
-        });
+      const { username, password } = body;
+      const user = users.find(x => x.username === username && x.password === password);
+      if (!user) {
+        return error('Не корректные логин или пароль');
+      }
+      return ok({
+        id: user.id,
+        username: user.username,
+        role: user.role,
+        token: `fake-jwt-token-${user.id}`
+      });
     }
 
     /**
@@ -85,12 +87,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return unauthorized();
       }
 
-      let resumesCombined = resumes.map(e => ({
-        ...e,
-        user: users.find(x => x.id === e.userId),
-        tags: tags.filter(x => e.tagsId.includes(x.id)),
-        profile: profiles.find(x => x.id === e.profileId)
-      }));
+      let resumesCombined = resumes.map(e => {
+        return {
+          ...e,
+          user: users.find(x => x.id === e.userId),
+          tags: tags.filter(x => e.tagsId.includes(x.id)),
+          profile: profiles.find(x => x.id === e.profileId)
+        };
+      });
 
       if (result.tags.length) {
         resumesCombined = resumesCombined.filter(r => {
@@ -136,6 +140,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       result.items = resumesCombined.slice((result.page - 1) * result.perPage, result.perPage * result.page);
 
       return ok(result);
+    }
+
+    /**
+     * Получение резюме по id
+     */
+    function getResumeById(): Observable<HttpEvent<any>> {
+      if (!isLoggedIn()) {
+        return unauthorized();
+      }
+      const id = Number(request.params.get('id')) || null;
+      if (id === null) { return error('Id must not be null or undefined'); }
+      const resume = resumes.filter(r => r.id === id);
+      if (!resume.length) { return notFound(); }
+
+      console.log(resume)
+      const prepared = {
+          ...resume[0],
+          user: users.find(x => x.id === resume[0]?.userId),
+          tags: tags.filter(x => resume[0].tagsId?.includes(x.id)),
+          profile: profiles.find(x => x.id === resume[0]?.profileId)
+      };
+
+      prepared.lanitExperience = prepared.lanitExperience?.map((l) => {
+        return Object.assign({tags: tags.filter(x => l.tagsId?.includes(x.id))}, l);
+      }) || null;
+
+      return ok(prepared);
     }
 
     /**
@@ -217,6 +248,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function unauthorized(): Observable<never> {
         return throwError({ status: 401, error: { message: 'Unauthorised' } });
+    }
+
+    function notFound(): Observable<never> {
+      return throwError({ status: 404, error: { message: 'Page not found' } });
     }
 
     function isLoggedIn(): boolean {

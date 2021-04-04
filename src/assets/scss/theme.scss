@@ -6,7 +6,7 @@ body, html {
   flex-direction: column;
 }
 
-app, .wrapper {
+app-resume, .wrapper {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -15,7 +15,7 @@ app, .wrapper {
 
 .card, .header {
   &-opacity  {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
   }
 }
 

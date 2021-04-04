@@ -2,9 +2,10 @@
  * @packageDocumentation
  * @module HomePage
  */
-import {Component, OnInit} from '@angular/core';
-import {User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesResponse} from '@app/_models';
-import {ResumesService, AuthenticationService, TagsService, ProfilesService} from '@app/_services';
+import { Component, OnInit } from '@angular/core';
+import { User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesResponse } from '@app/_models';
+import { ResumesService, AuthenticationService, TagsService, ProfilesService } from '@app/_services';
+import { Router } from '@angular/router';
 
 /** ## Домашняя страница
  * [[include:11.md]]
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
     private tagsService: TagsService,
     private authenticationService: AuthenticationService,
     public resumesPagination: Pagination,
-    public resumesFilter: ResumeFilter
+    public resumesFilter: ResumeFilter,
+    private router: Router
   ) {
     this.user = this.authenticationService.userValue;
   }
@@ -46,5 +48,9 @@ export class HomeComponent implements OnInit {
       this.resumesPagination.total = result.total;
       this.resumesFilter.responseTags = result.tags;
     });
+  }
+
+  goToResume(resume: Resume): void {
+    this.router.navigate(['resume', resume.id ]);
   }
 }

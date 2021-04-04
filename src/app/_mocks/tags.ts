@@ -64,8 +64,8 @@ export const tags = [
   { id: 63, value: 'Mustache'},
   { id: 64, value: 'Django'},
   { id: 65, value: 'Spring framework'},
-  { id: 65, value: 'Laravel'},
-  { id: 65, value: 'Symfony'},
-  { id: 65, value: 'Lumen'},
-  { id: 65, value: 'Yii2'},
+  { id: 66, value: 'Laravel'},
+  { id: 67, value: 'Symfony'},
+  { id: 68, value: 'Lumen'},
+  { id: 69, value: 'Yii2'},
 ];
