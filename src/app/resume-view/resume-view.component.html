@@ -1,0 +1,121 @@
+<div class="pb-4 pt-4">
+  <div id="resume" class="card">
+    <div class="card-header">
+      <h4 class="mb-0" *ngIf="!isLoading">{{resume.lastName}} {{resume.name}} {{resume.secondName}}</h4>
+      <ngx-skeleton-loader *ngIf="isLoading" [theme]="{'margin-top': '4px', width: '400px', height: 1.2, 'margin-bottom': 0}"></ngx-skeleton-loader>
+    </div>
+
+    <h5 class="mx-4 pt-4 pb-3 border-bottom">Контактные данные:</h5>
+    <div class="pb-4 px-4" *ngIf="isLoading">
+      <ngx-skeleton-loader count="5" [theme]="{'margin-top': '10px', width: '100%', height: 1.2, 'margin-bottom': 0}"></ngx-skeleton-loader>
+    </div>
+    <div *ngIf="!isLoading" class="row pb-4 px-4">
+      <div class="col">
+        <div *ngIf="resume.location" class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Место проживания:</div>
+          <div>{{ resume.location }}</div>
+        </div>
+        <div *ngIf="resume.phones" class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Мобильный телефон:</div>
+          <div class="comma-list">
+            <div *ngFor="let phone of resume.phones">{{ phone | perfectPhone }}</div>
+          </div>
+        </div>
+        <div *ngIf="resume.emails" class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Email:</div>
+          <div class="comma-list">
+            <div *ngFor="let email of resume.emails"><a href="mailto:{{ email }}">{{ email }}</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div *ngIf="resume.telegram" class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Телеграмм:</div>
+          <div>{{ resume.telegram }}</div>
+        </div>
+        <div *ngIf="resume.skype" class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Skype:</div>
+          <span>{{ resume.skype }}</span>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="mx-4 pt-4 pb-3 border-bottom">Ключевые навыки и направление:</h5>
+    <div class="pb-4 px-4" *ngIf="isLoading">
+      <ngx-skeleton-loader count="2" [theme]="{'margin-top': '10px', width: '100%', height: 1.2, 'margin-bottom': 0}"></ngx-skeleton-loader>
+    </div>
+    <div *ngIf="!isLoading" class="row pb-4 px-4">
+      <div class="col">
+        <div class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Направление разработки:</div>
+          <div>{{ resume.profile.text }}</div>
+        </div>
+        <div class="contact-item d-flex align-items-center pb-2">
+          <div class="col-form-label font-weight-bold w-40">Ключевые навыки:</div>
+          <button class="btn btn-sm mr-1 my-1 btn-info"
+                  disabled
+                  *ngFor="let tag of resume.tags;">
+            {{tag.display}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h5 *ngIf="(!isLoading && resume?.commonExperience) || isLoading" class="mx-4 pt-4 pb-3 border-bottom">Общий стаж работы: <span *ngIf="!isLoading" class="text-secondary">({{resume?.getCommonExperienceDuration()}})</span></h5>
+    <div class="pb-4 px-4" *ngIf="isLoading">
+      <ngx-skeleton-loader count="2" [theme]="{'margin-top': '10px', width: '100%', height: '80px', 'margin-bottom': 0}"></ngx-skeleton-loader>
+    </div>
+    <div *ngIf="!isLoading" class="row pb-4 px-4">
+      <div class="col">
+        <table class="table table-striped">
+          <tbody *ngIf="!isLoading">
+            <tr *ngFor="let exp of resume?.commonExperience">
+              <td class="w-20">
+                <div class="font-weight-bold">
+                  {{ exp.getFormattedDateBegin() | date:'LLLL  y' }} -
+                  <span *ngIf="!!exp.endDate; else forNow">{{exp.getFormattedDateEnd() | date:'LLLL  y'}}</span>
+                  <ng-template #forNow>по настоящее время</ng-template>
+                </div>
+                <div class="text-secondary">({{ exp.getDurationString() }})</div>
+              </td>
+              <td>
+                <h6><span class="font-weight-bold">{{ exp.company.name }}</span> <span *ngIf="exp.company.location"> ({{ exp.company.location }}) </span></h6>
+                <div class="pb-2 border-bottom mb-2"><a href="{{ exp.company.website }}" target="_blank">{{ exp.company.website }}</a></div>
+                <div class="pb-2"><div class="col-form-label font-weight-bold w-40">Должность:</div>{{ exp.position }}</div>
+                <div class="pb-2"><div class="col-form-label font-weight-bold w-40">Описание:</div><span [innerHTML]="exp.description"></span></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h5 *ngIf="(!isLoading && resume?.lanitExperience) || isLoading" class="mx-4 pt-4 pb-3 border-bottom">Опыт работы на проектах Ланит</h5>
+    <div class="row pb-4 px-4">
+      <div class="col">
+        <table class="table table-striped">
+          <tbody *ngIf="!isLoading">
+          <tr *ngFor="let lanit of resume?.lanitExperience">
+            <td class="w-20">
+              <div class="font-weight-bold">
+                {{ lanit.project }}
+              </div>
+            </td>
+            <td>
+              {{ lanit.position }}
+            </td>
+            <td>
+              <button class="btn btn-sm mr-1 my-1 btn-info"
+                      disabled
+                      *ngFor="let tag of lanit.tags;">
+                {{tag.display}}
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <span (click)="openPDF()" class="button-pdf"> Скачать в формате .pdf</span>
+</div>

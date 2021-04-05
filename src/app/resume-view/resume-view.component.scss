@@ -1,0 +1,29 @@
+.comma-list {
+  :not(:last-child):after {
+    content: ',';
+  }
+}
+
+.button-pdf {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  border-radius: 90% 90% 0% 90%;;
+  background: #d24136;
+  width: 140px;
+  height: 140px;
+  padding: 35px 10px 25px 30px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+  border: 7px solid #eb8a3e;
+  -webkit-transition: border-color .3s ease-out 0.3s;
+  -moz-transition: border-color .3s ease-out 0.3s;
+  -o-transition: border-color .3s ease-out 0.3s;
+  transition: border-color .3s ease-out 0.3s;
+  &:hover {
+    border: 7px solid #d24136;
+  }
+}
