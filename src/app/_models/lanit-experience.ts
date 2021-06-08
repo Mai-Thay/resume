@@ -7,11 +7,10 @@ import { Tag } from './tag';
 
 /**
  * ## Описание опыта на всех рабочих местах
- * [[include:25.md]]
  */
 export class LanitExperience {
-  project: string;
-  position: string;
+  project: string = '';
+  position: string = '';
   @Type(() => Tag)
-  tags: Tag[];
+  tags: Tag[] = [];
 }

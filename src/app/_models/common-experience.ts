@@ -9,15 +9,14 @@ import { getDurationString } from '@app/_helpers';
 
 /**
  * ## Описание опыта на всех рабочих местах
- * [[include:23.md]]
  */
 export class CommonExperience {
-  beginDate: string;
-  endDate?: string;
+  beginDate: string = '';
+  endDate: string = '';
   @Type(() => Company)
-  company: Company;
-  position: string;
-  description: string;
+  company: Company = new Company();
+  position: string = '';
+  description: string = '';
 
   /**
    * Получение корректной даты начала

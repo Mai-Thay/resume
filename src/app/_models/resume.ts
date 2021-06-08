@@ -2,51 +2,29 @@
  * @packageDocumentation
  * @module Models
  */
-import { Type } from 'class-transformer';
-import { User } from './user';
-import { Tag } from './tag';
-import { Profile } from './profile';
-import { CommonExperience } from './common-experience';
-import { getDurationString } from '@app/_helpers';
-import {LanitExperience} from '@app/_models/lanit-experience';
+import {Type} from 'class-transformer';
+import {Tag} from './tag';
+import {Profile} from './profile';
+import {ResumeExtra} from './resume-extra';
 
 /**
  * ## Резюме сотрудника
- * [[include:4.md]]
  */
 export class Resume {
-  id: number;
-
-  @Type(() => User)
-  user: User;
-
+  id?: string;
+  userId?: string;
   @Type(() => Tag)
   tags?: Tag[];
-  name?: string;
-  secondName?: string;
-  lastName?: string;
-  birthday?: string;
-  location?: string;
-  emails?: string[];
-  phones?: number[];
-  telegram?: string;
-  skype?: string;
-
   @Type(() => Profile)
-  profile?: Profile;
+  profiles?: Profile[];
+  @Type(() => ResumeExtra)
+  extra?: ResumeExtra;
 
-  @Type(() => CommonExperience)
-  commonExperience?: CommonExperience[];
-
-  @Type(() => LanitExperience)
-  lanitExperience?: LanitExperience[];
-
-  getFIO(): string {
-    return `${this.lastName} ${this.name[0]}. ${this.secondName[0]}.`;
-  }
-
-  getCommonExperienceDuration(): string {
-    const diff = this.commonExperience?.map((e) => e.getDurationInDays()).reduce((a, b) => a + b , 0);
-    return getDurationString(diff);
+  constructor() {
+    this.id = localStorage.getItem('username');
+    this.userId = localStorage.getItem('username');
+    this.tags = [];
+    this.profiles = [null];
+    this.extra = new ResumeExtra();
   }
 }

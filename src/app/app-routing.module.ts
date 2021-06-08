@@ -4,23 +4,27 @@
  * @module AppRoutingModule
  * @preferred
  */
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '@app/home';
-import { LoginComponent } from '@app/login';
-import { AuthGuard } from '@app/_guards';
-import { ResumeViewComponent } from '@app/resume-view/resume-view.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {ResumeListComponent} from '@app/resume-list';
+import {LoginComponent} from '@app/login';
+import {AuthGuard} from '@app/_guards';
+import {ResumeViewComponent} from '@app/resume-view/resume-view.component';
+import {ResumeEditComponent} from '@app/resume-edit/resume-edit.component';
+import {Role} from '@app/_enums';
 
 /**
  * ## Определение маршрутизации в приложении
- * [[include:16.md]]
  */
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'list',
+    component: ResumeListComponent,
     canActivate: [AuthGuard],
-    data: {title: 'Список резюме'}
+    data: {
+      title: 'Список резюме',
+      roles: [Role.Admin]
+    }
   },
   {
     path: 'login',
@@ -35,12 +39,19 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {title: 'Просмотр резюме'}
   },
+  {
+    path: 'resume',
+    component: ResumeEditComponent,
+    canActivate: [AuthGuard],
+    data: {title: 'Мое резюме'}
+  },
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  {path: '**', redirectTo: 'list'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

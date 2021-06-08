@@ -2,32 +2,36 @@
  * @packageDocumentation
  * @module Guards
  */
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthenticationService } from '@app/_services';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {AuthenticationService} from '@app/_services';
 
 /**
  * ## AuthGuard
  * Ограничение доступа к маршрутам по признаку авторизованности пользователя
- * [[include:8.md]]
  */
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService
-    ) { }
+  userRoles: string[];
+  isAuth: boolean;
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        const user = this.authenticationService.userValue;
-        if (user) {
-            if (route.data.roles && route.data.roles.indexOf(user.role) === -1) {
-                this.router.navigate(['/']);
-                return false;
-            }
-            return true;
-        }
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.rolesSubject.subscribe(roles => this.userRoles = roles);
+    this.authenticationService.authSubject.subscribe(auth => this.isAuth = auth);
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.isAuth) {
+      if (route.data.roles && !route.data.roles.filter(r => this.userRoles.includes(r)).length) {
+        this.router.navigate(['/login']);
         return false;
+      }
+      return true;
     }
+    this.router.navigate(['/login']);
+    return false;
+  }
 }

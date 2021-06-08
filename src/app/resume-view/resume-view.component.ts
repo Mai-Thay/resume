@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ResumesService } from '@app/_services';
-import { Resume } from '@app/_models';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ResumesService} from '@app/_services';
+import {Resume} from '@app/_models';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -14,7 +14,8 @@ export class ResumeViewComponent implements OnInit {
   isLoading = true;
   resume: Resume;
 
-  constructor(private route: ActivatedRoute, private resumeService: ResumesService) { }
+  constructor(private route: ActivatedRoute, private resumeService: ResumesService) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -45,7 +46,7 @@ export class ResumeViewComponent implements OnInit {
         heightLeft -= pageHeight;
       }
 
-      PDF.save(`${this.resume.getFIO()}.pdf`);
+      PDF.save(`${this.resume?.extra?.getFIO()}.pdf`);
     });
   }
 

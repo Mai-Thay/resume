@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 import { Tag } from '@app/_models';
 /**
  * ## Параметры фильтрации резюме
- * [[include:5.md]]
  */
 @Injectable({ providedIn: 'root' })
 export class ResumeFilter {
@@ -16,7 +15,7 @@ export class ResumeFilter {
   tags?: Array<Tag> = null;
 
   /** Массив ID тегов для подсветки */
-  responseTags?: Array<number> = null;
+  responseTags?: Array<string> = null;
 
   /** Выполнить по сабмиту */
   onSubmit = (): void => {};

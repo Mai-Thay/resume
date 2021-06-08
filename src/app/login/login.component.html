@@ -1,28 +1,32 @@
-<div class="col-md-6 offset-md-3 d-flex min-vh-100">
-    <div class="card card-opacity mt-auto mb-auto vw-100">
-        <h1 class="card-header text-white p-5">Авторизация</h1>
-        <div class="card-body p-5">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="username" class="text-monospace text-white">Логин</label>
-                    <input id="username" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }" />
-                    <div *ngIf="submitted && formFields.username.errors" class="invalid-feedback">
-                        <div *ngIf="formFields.username.errors.required">Логин обязателен</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="text-monospace text-white">Пароль</label>
-                    <input id="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }" />
-                    <div *ngIf="submitted && formFields.password.errors" class="invalid-feedback">
-                        <div *ngIf="formFields.password.errors.required">Пароль обязателен</div>
-                    </div>
-                </div>
-                <div *ngIf="error" class="text-danger fs-80">{{error}}</div>
-                <button [disabled]="loading" class="btn btn-block btn-secondary text-monospace text-uppercase btn-lg mt-5">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm  mr-1"></span>
-                    Войти
-                </button>
-            </form>
+<div class="col-md-10 col-lg-7 offset-md-1 offset-lg-3 d-flex min-vh-100">
+  <div class="card card-opacity mt-auto mb-auto vw-100">
+    <h1 class="card-header text-white pt-5 pl-5 pr-5 pb-2">Авторизация</h1>
+    <p class="text-white pr-5 pl-5">Для корректной работы сервиса вы должны находиться внутри сети Ланит (при удаленной работе не забудьте включить соединение cisco vpn Ланит)</p>
+    <div class="card-body pr-5 pl-5 pt-3 pb-5">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username" class="text-monospace text-white">Логин</label>
+          <input id="username" type="text" formControlName="username" class="form-control" autocomplete="username"
+                 [ngClass]="{ 'is-invalid': submitted && formFields.username.errors }"/>
+          <div *ngIf="submitted && formFields.username.errors" class="invalid-feedback">
+            <div *ngIf="formFields.username.errors.required">Логин обязателен</div>
+          </div>
         </div>
+        <div class="form-group">
+          <label for="password" class="text-monospace text-white">Пароль</label>
+          <input id="password" type="password" formControlName="password" class="form-control"
+                 autocomplete="current-password"
+                 [ngClass]="{ 'is-invalid': submitted && formFields.password.errors }"/>
+          <div *ngIf="submitted && formFields.password.errors" class="invalid-feedback">
+            <div *ngIf="formFields.password.errors.required">Пароль обязателен</div>
+          </div>
+        </div>
+        <div *ngIf="error" class="text-danger fs-80">{{error}}</div>
+        <button [disabled]="loading" class="btn btn-block btn-secondary text-monospace text-uppercase btn-lg mt-5">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm  mr-1"></span>
+          Войти
+        </button>
+      </form>
     </div>
+  </div>
 </div>

@@ -2,24 +2,15 @@
  * @packageDocumentation
  * @module Models
  */
-import {SortDir} from '@app/_enums';
 import {Injectable} from '@angular/core';
 
-/** ## Параметры постраничной навигации и сортировки
- * [[include:2.md]]
- */
+/** ## Параметры постраничной навигации и сортировки */
 @Injectable({ providedIn: 'root' })
 export class Pagination {
   /** Номер текущей страницы */
   private $page = 1;
   /** Элементов на странице */
   private $perPage = 10;
-
-  /** Имя поля по которому должна осущетсвляться сортировка */
-  sortBy?: string;
-
-  /** Направление сотрировки */
-  sortDir?: SortDir;
 
   /** Общее количество элементов списка */
   total = 0;
@@ -54,42 +45,9 @@ export class Pagination {
   /** Собирает параметры для запроса */
   get httpParams(): {[param: string]: string | string[]} {
     const params: {[param: string]: string | string[]} = {
-      page: this.page.toString(),
-      perPage: this.perPage.toString(),
+      size: this.perPage.toString(),
+      perPage: this.page.toString(),
     };
-    if (this.sortBy) {
-      params.sortBy = this.sortBy;
-      params.sortDir = !!this.sortDir ? SortDir[this.sortDir] : SortDir.asc;
-    }
     return params;
-  }
-
-  /** Переключает сортировку */
-  switchSort(sortBy: string): void {
-    if (this.sortBy !== sortBy) {
-      this.sortBy = sortBy;
-      this.sortDir = SortDir.asc;
-    } else {
-      this.sortDir = SortDir.desc === this.sortDir ? SortDir.asc : SortDir.desc;
-    }
-    this.onChange();
-  }
-
-  /** Очищает параметры сорировки */
-  clearSort(): void {
-    this.sortBy = null;
-    this.sortDir = null;
-  }
-
-  /**
-   * Проверяет направление сортировки для заданного поля сортировки
-   * @param name
-   */
-  checkSortBy(name: string): string {
-    if (name === this.sortBy) {
-      return this.sortDir;
-    } else {
-      return '';
-    }
   }
 }

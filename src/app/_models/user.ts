@@ -4,7 +4,6 @@
  */
 /**
  * ## Пользователь
- * [[include:7.md]]
  */
 export class User {
     id: number;

@@ -6,11 +6,10 @@ import { Expose } from 'class-transformer';
 
 /**
  * ##Теги (ключевые навыки, технологии)
- * [[include:6.md]]
  */
 export class Tag {
   @Expose({ name: 'id' })
-  value: number;
+  value: string;
   @Expose({ name: 'value' })
   display: string;
 }

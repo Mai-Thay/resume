@@ -1,0 +1,11 @@
+{
+  "/sashka/*": {
+    "target": "http://valya.dks.lanit.ru:10000",
+    "pathRewrite": {
+      "^/sashka": "/sashka/"
+    },
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "secure": false
+  }
+}

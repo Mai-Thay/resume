@@ -12,12 +12,11 @@ import { plainToClass } from 'class-transformer';
 
 /**
  * ## Сервис для работы с направлениями деятельности сотрудников
- * [[include:19.md]]
  */
 @Injectable({ providedIn: 'root' })
 export class ProfilesService extends BaseService{
   getList(): Observable<Profile[]> {
-    return this.http.get<Profile[]>(`${environment.apiUrl}/profiles`).pipe(
+    return this.http.get<Profile[]>(`${environment.apiUrl}/api/profile`).pipe(
       map(response => plainToClass(Profile, response)),
       catchError(this.handleError('getProfiles', []))
     );

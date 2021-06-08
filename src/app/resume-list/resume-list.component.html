@@ -3,14 +3,16 @@
     <div class="card-body">
       <div class="form-group">
         <label for="profile">Выберите направление разработки: </label>
-        <select id="profile" [(ngModel)]="resumesFilter.profile" [ngModelOptions]="{standalone: true}" class="browser-default custom-select">
+        <select id="profile" [(ngModel)]="resumesFilter.profile" [ngModelOptions]="{standalone: true}"
+                class="browser-default custom-select">
           <option [value]="null">Выберите направление</option>
           <option *ngFor="let option of this.profiles" [value]="option.id">{{ option.text }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="tags">Выберите ключевые навыки технологии: </label>
-        <tag-input id="tags" [(ngModel)]="resumesFilter.tags" [ngModelOptions]="{standalone: true}" [placeholder]="'+ добавить еще'" [secondaryPlaceholder]="'Начните вводить текст'">
+        <tag-input id="tags" [(ngModel)]="resumesFilter.tags" [ngModelOptions]="{standalone: true}"
+                   [placeholder]="'+ добавить еще'" [secondaryPlaceholder]="'Начните вводить текст'">
           <tag-input-dropdown [autocompleteItems]="tags">
           </tag-input-dropdown>
         </tag-input>
@@ -24,18 +26,12 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col"
-              class="w-5"
-              [ngClass]="['sortable', resumesPagination.checkSortBy('id')]"
-              (click)="resumesPagination.switchSort('id')">#</th>
+          <th scope="col" class="w-5">#</th>
           <th scope="col"
               class="w-20"
-              [ngClass]="['sortable', resumesPagination.checkSortBy('fio')]"
-              (click)="resumesPagination.switchSort('fio')">ФИО</th>
-          <th scope="col"
-              class="w-25"
-              [ngClass]="['sortable', resumesPagination.checkSortBy('profile')]"
-              (click)="resumesPagination.switchSort('profile')">Направление работы</th>
+          >ФИО
+          </th>
+          <th scope="col" class="w-25">Направление работы</th>
           <th scope="col" class="w-40">Ключевые навыки</th>
           <th scope="col"></th>
         </tr>
@@ -51,9 +47,9 @@
           </td>
           <td class="w-40">
             <button class="btn btn-sm mr-1 my-1"
-                  disabled
-                  [ngClass]="{'btn-outline-info': !resumesFilter.isInResponse(tag), 'btn-info': resumesFilter.isInResponse(tag)}"
-                  *ngFor="let tag of resume.tags;">
+                    disabled
+                    [ngClass]="{'btn-outline-info': !resumesFilter.isInResponse(tag), 'btn-info': resumesFilter.isInResponse(tag)}"
+                    *ngFor="let tag of resume.tags;">
               {{tag.display}}
             </button>
           </td>
@@ -63,15 +59,17 @@
         </tr>
         </tbody>
       </table>
-      <ngx-skeleton-loader *ngIf="resumesPagination.isLoading" [count]="resumesPagination.perPage" animation="pulse" [theme]="{height: '50px'}"></ngx-skeleton-loader>
+      <ngx-skeleton-loader *ngIf="resumesPagination.isLoading" [count]="resumesPagination.perPage" animation="pulse"
+                           [theme]="{height: '50px'}"></ngx-skeleton-loader>
       <div class="d-flex justify-content-between">
-      <ngb-pagination
-        [(page)]="resumesPagination.page"
-        [pageSize]="resumesPagination.perPage"
-        [collectionSize]="resumesPagination.total"></ngb-pagination>
+        <ngb-pagination
+          [(page)]="resumesPagination.page"
+          [pageSize]="resumesPagination.perPage"
+          [collectionSize]="resumesPagination.total"></ngb-pagination>
         <div class="d-flex w-40 justify-content-end align-items-center">
           <span class="mr-2">Выводить по</span>
-          <select [(ngModel)]="resumesPagination.perPage" [ngModelOptions]="{standalone: true}" class="browser-default custom-select w-20 mr-2">
+          <select [(ngModel)]="resumesPagination.perPage" [ngModelOptions]="{standalone: true}"
+                  class="browser-default custom-select w-20 mr-2">
             <option *ngFor="let option of resumesPagination.perPageVariants" [value]="option">{{ option }}</option>
           </select>
           <span>элементов</span>

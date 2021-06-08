@@ -7,12 +7,11 @@ import { User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesRespo
 import { ResumesService, AuthenticationService, TagsService, ProfilesService } from '@app/_services';
 import { Router } from '@angular/router';
 
-/** ## Домашняя страница
- * [[include:11.md]]
+/**
+ * ## Домашняя страница
  */
-@Component({ templateUrl: './home.component.html' })
-export class HomeComponent implements OnInit {
-  user: User;
+@Component({ templateUrl: './resume-list.component.html' })
+export class ResumeListComponent implements OnInit {
   resumes: Resume[] = [];
   tags: Tag[];
   profiles: Profile[];
@@ -21,13 +20,10 @@ export class HomeComponent implements OnInit {
     private profilesService: ProfilesService,
     private resumesService: ResumesService,
     private tagsService: TagsService,
-    private authenticationService: AuthenticationService,
     public resumesPagination: Pagination,
     public resumesFilter: ResumeFilter,
     private router: Router
-  ) {
-    this.user = this.authenticationService.userValue;
-  }
+  ) { }
 
   ngOnInit(): void {
     this.resumesPagination.onChange = this.resumesFilter.onSubmit = () => this.getResumes();

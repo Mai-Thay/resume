@@ -23,6 +23,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "@babel/runtime-corejs3",
+              "raf"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

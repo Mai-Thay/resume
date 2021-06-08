@@ -7,7 +7,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve --open --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -32,7 +32,9 @@
     "embedme": "^1.22.0",
     "jspdf": "^2.3.1",
     "ngx-chips": "^2.2.2",
+    "ngx-cookie-service": "^12.0.0",
     "ngx-dt-table": "0.0.8",
+    "ngx-mask": "^12.0.0",
     "ngx-skeleton-loader": "^2.9.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.5",
@@ -59,7 +61,7 @@
     "protractor": "^7.0.0",
     "ts-node": "^8.3.0",
     "tslint": "^6.1.0",
-    "typedoc": ">=0.7.0 <0.20.0",
+    "typedoc": "^0.20.36",
     "typedoc-plugin-external-module-name": "^4.0.6",
     "typescript": "~4.1.0"
   }
