@@ -1,0 +1,11 @@
+<input
+  class="form-control"
+  placeholder="yyyy-mm-dd"
+  [(ngModel)]="model"
+  [minDate]="{year: 1960, month: 1}"
+  ngbDatepicker
+  #d="ngbDatepicker"
+  [placement]="placement"
+  (click)="d.toggle()"
+>
+

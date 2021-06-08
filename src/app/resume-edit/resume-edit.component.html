@@ -1,0 +1,275 @@
+<div class="pb-4 pt-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="mb-4">Отредактируйте данные</h1>
+      <form (ngSubmit)="saveResume()" #form="ngForm">
+        <div *ngIf="resume">
+          <div class="form-group row">
+            <label class="col-4" for="name">Имя: </label>
+            <div class="col-8">
+              <input
+                class="form-control"
+                #name="ngModel"
+                name="name"
+                required
+                pattern="[а-яА-Я]*"
+                minlength="2"
+                [ngModelOptions]="{updateOn: 'blur'}"
+                id="name"
+                type="text"
+                [(ngModel)]="resume.extra.name">
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert row">
+                <div *ngIf="name.errors?.required">Поле имя обязательно для заполнения</div>
+                <div *ngIf="name.errors?.minlength">Минимальное количество символов - 2</div>
+                <div *ngIf="name.errors?.pattern">Недопустимые символы в поле Имя</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="second-name">Отчество: </label>
+            <div class="col-8">
+              <input
+                class="form-control"
+                id="second-name"
+                type="text"
+                name="second-name"
+                [(ngModel)]="resume.extra.secondName"
+                required
+                pattern="[а-яА-Я]*"
+                minlength="2"
+                #secondName="ngModel">
+              <div *ngIf="secondName.invalid && (secondName.dirty || secondName.touched)" class="alert row">
+                <div *ngIf="secondName.errors?.required">Поле Отчество обязательно для заполнения</div>
+                <div *ngIf="secondName.errors?.minlength">Минимальное количество символов - 2</div>
+                <div *ngIf="secondName.errors?.pattern">Недопустимые символы в поле Отчество</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="last-name">Фамилия: </label>
+            <div class="col-8">
+              <input
+                name="last-name"
+                class="form-control"
+                id="last-name"
+                type="text"
+                required
+                pattern="[а-яА-Я]*"
+                minlength="2"
+                #lastName="ngModel"
+                [(ngModel)]="resume.extra.lastName"
+              >
+              <div *ngIf="lastName.invalid && (secondName.dirty || secondName.touched)" class="alert row">
+                <div *ngIf="lastName.errors?.required">Поле Фамилия обязательно для заполнения</div>
+                <div *ngIf="lastName.errors?.minlength">Минимальное количество символов - 2</div>
+                <div *ngIf="lastName.errors?.pattern">Недопустимые символы в поле Фамилия</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="birthday">Дата рождения: </label>
+            <div class="col-8">
+              <app-date-picker name="birthday" id="birthday" [(ngModel)]="resume.extra.birthday"></app-date-picker>
+            </div>
+          </div>
+          <h2 class="mb-4">Контактные данные</h2>
+          <div class="form-group row">
+            <label class="col-4" for="location">Город проживания: </label>
+            <div class="col-8">
+              <input
+                class="form-control"
+                id="location"
+                name="location"
+                type="text"
+                [(ngModel)]="resume.extra.location"
+                pattern="[а-яА-Я]*"
+                minlength="2"
+                #location="ngModel"
+              >
+              <div *ngIf="location.invalid && (secondName.dirty || secondName.touched)" class="alert row">
+                <div *ngIf="location.errors?.minlength">Минимальное количество символов - 2</div>
+                <div *ngIf="location.errors?.pattern">Недопустимые символы в поле Город проживания</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4">Телефонные номера: </label>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-9">
+                  <div *ngFor="let item of resume.extra.phones; let i = index">
+                    <input
+                      class="form-control"
+                      [ngClass]="{'mt-3': !!i}"
+                      mask="(000) 000 00-00"
+                      prefix="+7 "
+                      minlength="10"
+                      type="text"
+                      [(ngModel)]="resume.extra.phones[i]"
+                      [ngModelOptions]="{standalone: true, updateOn: 'blur'}"
+                    >
+                  </div>
+                </div>
+                <div class="col-3">
+                  <button (click)="resume.extra.addNewPhoneField()" type="button" class="btn btn-primary w-100">
+                    Добавить
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4">Контакные email адреса: </label>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-9">
+                  <div>
+                    <input
+                      *ngFor="let item of resume.extra.emails; let i = index"
+                      class="form-control"
+                      [ngClass]="{'mt-3': !!i}"
+                      [(ngModel)]="resume.extra.emails[i]"
+                      [ngModelOptions]="{standalone: true, updateOn: 'blur'}"
+                    >
+                  </div>
+                </div>
+                <div class="col-3">
+                  <button (click)="resume.extra.addNewEmailField()" type="button" class="btn btn-primary w-100">
+                    Добавить
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="telegram">Телеграм: </label>
+            <div class="col-8">
+              <input class="form-control" name="telegram" id="telegram" type="text" [(ngModel)]="resume.extra.telegram">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="skype">Skype: </label>
+            <div class="col-8">
+              <input class="form-control" name="skype" id="skype" type="text" [(ngModel)]="resume.extra.skype">
+            </div>
+          </div>
+          <h2 class="mb-4">Описание опыта работы</h2>
+          <div class="form-group row">
+            <label class="col-4" for="profile">Выберите направление разработки: </label>
+            <div class="col-8">
+              <select id="profile" [compareWith]="compare" [(ngModel)]="resume.profiles[0]"
+                      [ngModelOptions]="{standalone: true}"
+                      class="browser-default custom-select">
+                <option [value]="null">Выберите направление</option>
+                <option *ngFor="let option of this.profiles" [ngValue]="option">{{ option.text }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="tags">Выберите ключевые навыки/технологии: </label>
+            <div class="col-8">
+              <tag-input id="tags" [(ngModel)]="resume.tags" [ngModelOptions]="{standalone: true}"
+                         (onAdd)="onAddTag($event)"
+                         [placeholder]="'+ добавить еще'" [secondaryPlaceholder]="'Начните вводить текст'">
+                <tag-input-dropdown [autocompleteItems]="tags">
+                </tag-input-dropdown>
+              </tag-input>
+            </div>
+          </div>
+          <h3 class="mb-4">Опыт на предыдущих местах работы</h3>
+          <div class="common" *ngFor="let fields of this.resume.extra.commonExperience; let i = index">
+            <div class="point"><span>{{i + 1}}.</span></div>
+            <div class="form-group row">
+              <label class="col-4" for="org-{{i}}">Наименование организации: </label>
+              <div class="col-8">
+                <input class="form-control" name="org-name-{{i}}" id="org-{{i}}" type="text"
+                       [(ngModel)]="fields.company.name" [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="site-{{i}}">Сайт организации: </label>
+              <div class="col-8">
+                <input class="form-control" id="site-{{i}}" type="text" [(ngModel)]="fields.company.website"
+                       [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="city-{{i}}">Город расположения организации: </label>
+              <div class="col-8">
+                <input class="form-control" id="city-{{i}}" type="text" [(ngModel)]="fields.company.location"
+                       [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4">Период трудоустройства: </label>
+              <div class="col-4">
+                начало:
+                <app-date-picker [ngModelOptions]="{standalone: true, updateOn: 'blur'}"
+                                 [(ngModel)]="fields.beginDate"></app-date-picker>
+              </div>
+              <div class="col-4">
+                окончание:
+                <app-date-picker [ngModelOptions]="{standalone: true, updateOn: 'blur'}"
+                                 [(ngModel)]="fields.endDate"></app-date-picker>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="position-{{i}}">Наименование должности: </label>
+              <div class="col-8">
+                <input class="form-control" id="position-{{i}}" type="text" [(ngModel)]="fields.position"
+                       [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="desc-{{i}}">Описание: </label>
+              <div class="col-8">
+                <textarea rows="10" class="form-control" id="desc-{{i}}" type="text"
+                          [(ngModel)]="fields.description"
+                          [ngModelOptions]="{standalone: true, updateOn: 'blur'}"></textarea>
+              </div>
+            </div>
+          </div>
+          <button (click)="this.resume.extra.addCommonExperience()" type="button" class="btn btn-primary">Добавить
+            позицию
+          </button>
+          <h3 class="mb-4 mt-5">Опыт на проектах ланит</h3>
+          <div class="lanit" *ngFor="let fields of this.resume.extra.lanitExperience; let i = index">
+            <div class="point"><span>{{i + 1}}.</span></div>
+            <div class="form-group row">
+              <label class="col-4" for="project-{{i}}">Наименование проекта: </label>
+              <div class="col-8">
+                <input class="form-control" id="project-{{i}}" type="text" [(ngModel)]="fields.project"
+                       [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="position-project-{{i}}">Полизиция на проекте: </label>
+              <div class="col-8">
+                <input class="form-control" id="position-project-{{i}}" type="text" [(ngModel)]="fields.position"
+                       [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="tags-projects-{{i}}">Выберите технологии: </label>
+              <div class="col-8">
+                <tag-input id="tags-projects-{{i}}" [(ngModel)]="fields.tags" [ngModelOptions]="{standalone: true}"
+                           (onAdd)="onAddTag($event)" [placeholder]="'+ добавить еще'"
+                           [secondaryPlaceholder]="'Начните вводить текст'">
+                  <tag-input-dropdown [autocompleteItems]="tags">
+                  </tag-input-dropdown>
+                </tag-input>
+              </div>
+            </div>
+          </div>
+          <button (click)="this.resume.extra.addLanitExperience()" type="button" class="btn btn-primary">Добавить
+            позицию
+          </button>
+        </div>
+        <div class="d-flex justify-content-end mt-5">
+          <button [disabled]="!form.form.valid" type="submit" class="btn d-flex btn-primary btn-lg">Сохранить резюме
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
