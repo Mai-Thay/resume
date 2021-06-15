@@ -2,19 +2,17 @@
  * @packageDocumentation
  * @module Models
  */
-import { Type } from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 import { Resume } from './resume';
 import {Tag} from '@app/_models/tag';
 /** ## Список резюме с потсраничной разбивкой (модель ответа от севера)
  */
 export  class PagedResumesResponse {
   /** Всего элесентов */
+  @Expose({ name: 'totalItems' })
   total: number;
-  /** Номер текущей страницы */
-  page: number;
-  /** Элементов на странице */
-  perPage: number;
   @Type(() => Resume)
+  @Expose({ name: 'result' })
   /** Массив элементов */
   items: Resume[];
   /** Теги включенные в фильтрацию */

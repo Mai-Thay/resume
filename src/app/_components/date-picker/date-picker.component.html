@@ -3,9 +3,13 @@
   placeholder="yyyy-mm-dd"
   [(ngModel)]="model"
   [minDate]="{year: 1960, month: 1}"
+  [required]="required"
   ngbDatepicker
   #d="ngbDatepicker"
+  #input="ngModel"
   [placement]="placement"
   (click)="d.toggle()"
 >
-
+<div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert row">
+  <div *ngIf="input.errors?.required">Поле обязательно для заполнения</div>
+</div>

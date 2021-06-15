@@ -20,10 +20,10 @@ export class ResumeExtra {
   skype: string = '';
 
   @Type(() => CommonExperience)
-  commonExperience: CommonExperience[] = [new CommonExperience()];
+  commonExperience: CommonExperience[] = [];
 
   @Type(() => LanitExperience)
-  lanitExperience: LanitExperience[] = [new LanitExperience()];
+  lanitExperience: LanitExperience[] = [];
 
   getFIO(): string {
     return `${this.lastName} ${this.name[0]}. ${this.secondName[0]}.`;
@@ -38,8 +38,16 @@ export class ResumeExtra {
     this.commonExperience.push(new CommonExperience());
   }
 
+  deleteCommonExperience(index: number): void {
+    this.commonExperience.splice(index, 1);
+  }
+
   addLanitExperience(): void {
     this.lanitExperience.push(new LanitExperience());
+  }
+
+  deleteLanitExperience(index: number): void {
+    this.lanitExperience.splice(index, 1);
   }
 
   addNewEmailField(): void {

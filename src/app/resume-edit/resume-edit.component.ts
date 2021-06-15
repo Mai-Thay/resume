@@ -13,6 +13,7 @@ export class ResumeEditComponent implements OnInit {
   resume: Resume;
   tags: Tag[];
   profiles: Profile[];
+  isSending: boolean = false;
 
   constructor(private resumeService: ResumesService,
               private authService: AuthenticationService,
@@ -33,18 +34,23 @@ export class ResumeEditComponent implements OnInit {
   }
 
   saveResume(): void {
-    this.resume.userId = localStorage.getItem('username');
-    this.resume.id = localStorage.getItem('username');
-    this.resumeService.update(this.resume).subscribe(res => {
-      console.log(res);
-    });
+    if(!this.isSending) {
+      this.isSending = true;
+      this.resume.userId = localStorage.getItem('username');
+      this.resume.id = localStorage.getItem('username');
+      this.resumeService.update(this.resume).subscribe(res => {
+        setTimeout(() => {
+          this.isSending = false;
+        }, 500);
+      });
+    }
   }
 
   compare(a: Profile, b: Profile): boolean {
     return a?.id === b?.id;
   }
 
-  onAddTag(tag: Tag): void {
+  onAddTag(tag: Tag | any): void {
     if (!this.tags.filter(t => t.value === tag.value).length) {
       this.tagsService.add(tag).subscribe((res: Tag) => {
         this.tags.push(res);

@@ -3,9 +3,9 @@
  * @module Models
  */
 
-import { Type } from 'class-transformer';
-import { Company } from './company';
-import { getDurationString } from '@app/_helpers';
+import {Type} from 'class-transformer';
+import {Company} from './company';
+import {getDurationString} from '@app/_helpers';
 
 /**
  * ## Описание опыта на всех рабочих местах

@@ -3,7 +3,6 @@
  * @module Services
  */
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -21,7 +20,6 @@ export class AuthenticationService extends BaseService {
   public rolesSubject: BehaviorSubject<string[]>;
 
   constructor(
-    private router: Router,
     protected http: HttpClient,
   ) {
     super(http);
@@ -43,7 +41,7 @@ export class AuthenticationService extends BaseService {
     if (this.isAdmin) {
       return '/list';
     } else {
-      return '/resume';
+      return '/edit';
     }
   }
 
@@ -76,7 +74,6 @@ export class AuthenticationService extends BaseService {
   logout(): void {
     this.authSubject.next(false);
     localStorage.removeItem('username');
-    this.router.navigate(['/login']);
   }
 
   /**

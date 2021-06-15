@@ -46,7 +46,7 @@ export class Pagination {
   get httpParams(): {[param: string]: string | string[]} {
     const params: {[param: string]: string | string[]} = {
       size: this.perPage.toString(),
-      perPage: this.page.toString(),
+      page: this.page.toString(),
     };
     return params;
   }

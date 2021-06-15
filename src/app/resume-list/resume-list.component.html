@@ -26,7 +26,6 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th scope="col" class="w-5">#</th>
           <th scope="col"
               class="w-20"
           >ФИО
@@ -38,12 +37,11 @@
         </thead>
         <tbody *ngIf="!resumesPagination.isLoading">
         <tr *ngFor="let resume of resumes">
-          <th scope="row">{{ resume.id }}</th>
           <td>
-            {{resume.getFIO()}}
+            {{resume.extra.getFIO()}}
           </td>
           <td>
-            {{resume.profile.text}}
+            {{resume.profiles[0].text}}
           </td>
           <td class="w-40">
             <button class="btn btn-sm mr-1 my-1"

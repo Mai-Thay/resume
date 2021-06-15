@@ -40,7 +40,7 @@ const routes: Routes = [
     data: {title: 'Просмотр резюме'}
   },
   {
-    path: 'resume',
+    path: 'edit',
     component: ResumeEditComponent,
     canActivate: [AuthGuard],
     data: {title: 'Мое резюме'}

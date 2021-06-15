@@ -10,7 +10,7 @@ app-resume, .wrapper {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  background-size: cover;
+  background-size: cover !important;
 }
 
 .container {
@@ -144,6 +144,16 @@ tag-input#tags {
     border: 3px solid #17a2b8;
     border-radius: 50px;
   }
+}
+
+.star-required {
+  color: red;
+}
+
+.alert {
+  margin-bottom: 0;
+  color: red;
+  font-size: 12px;
 }
 
 

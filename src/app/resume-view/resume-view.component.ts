@@ -27,16 +27,16 @@ export class ResumeViewComponent implements OnInit {
   }
 
   public openPDF(): void {
+    let position = 0;
     const DATA = document.getElementById('resume');
-
     html2canvas(DATA).then(canvas => {
-      const fileWidth = 208;
-      const pageHeight = 295;
+      const fileWidth = 450;
+      const pageHeight = 590;
       const fileHeight = canvas.height * fileWidth / canvas.width;
       let heightLeft = fileHeight;
       const FILEURI = canvas.toDataURL('image/png');
-      const PDF = new jsPDF('p', 'pt', [fileWidth + 10, pageHeight + 10]);
-      let position = 0;
+      const PDF = new jsPDF('p', 'px', [fileWidth, pageHeight]);
+
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       heightLeft -= pageHeight;
       while (heightLeft >= 0) {
@@ -46,7 +46,7 @@ export class ResumeViewComponent implements OnInit {
         heightLeft -= pageHeight;
       }
 
-      PDF.save(`${this.resume?.extra?.getFIO()}.pdf`);
+      PDF.save(`${this.resume.extra.getFIO()}pdf`);
     });
   }
 

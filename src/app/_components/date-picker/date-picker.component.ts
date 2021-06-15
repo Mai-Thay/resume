@@ -57,10 +57,6 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     ]
 })
 export class DatePickerComponent implements OnInit, ControlValueAccessor {
-  private _model: NgbDateStruct;
-  placement = 'bottom';
-  onChange = (_: any) => {};
-  onTouched = () => {};
 
   @Input()
   set model(value: NgbDateStruct) {
@@ -73,6 +69,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   constructor() { }
+  private _model: NgbDateStruct;
+  placement = 'bottom';
+  @Input() required = false;
+  onChange = (_: any) => {};
+  onTouched = () => {};
 
   writeValue(obj: any): void {
     this.model = obj;

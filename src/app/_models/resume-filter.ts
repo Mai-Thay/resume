@@ -24,10 +24,10 @@ export class ResumeFilter {
   get httpParams(): {[param: string]: string | string[]} {
     const params: {[param: string]: string | string[]} = {};
     if (this.profile !== null && this.profile !== undefined) {
-     params.profile = this.profile.toString();
+     params.profilesIn = this.profile.toString();
     }
     if (this.tags && this.tags.length) {
-      params.tags = this.tags.map((t) => t.value.toString());
+      params.tagsIn = this.tags.map((t) => t.value.toString());
     }
     return params;
   }
