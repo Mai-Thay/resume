@@ -1,13 +1,17 @@
+/**
+ * @packageDocumentation
+ * @module ResumeEdit
+ */
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, ProfilesService, ResumesService, TagsService} from '@app/_services';
-import {Profile, Resume, Tag} from '@app/_models';
-import {TagModel} from 'ngx-chips/core/accessor';
-import {classToClass, classToClassFromExist, plainToClass, plainToClassFromExist} from 'class-transformer';
+import {AuthenticationService, ProfilesService, ResumesService, TagsService} from '@app/services';
+import {Profile, Resume, Tag} from '@app/models';
 
+/**
+ * ## Компонент формы редактирования/создания резюме
+ */
 @Component({
   selector: 'app-resume-edit',
   templateUrl: './resume-edit.component.html',
-  styleUrls: ['./resume-edit.component.scss']
 })
 export class ResumeEditComponent implements OnInit {
   resume: Resume;
@@ -33,8 +37,11 @@ export class ResumeEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Сохранение резюме
+   */
   saveResume(): void {
-    if(!this.isSending) {
+    if (!this.isSending) {
       this.isSending = true;
       this.resume.userId = localStorage.getItem('username');
       this.resume.id = localStorage.getItem('username');
@@ -50,6 +57,11 @@ export class ResumeEditComponent implements OnInit {
     return a?.id === b?.id;
   }
 
+  /**
+   * Коллбек отрабатывающий при событии добавления тега
+   * если тега нет в базе, создается новый
+   * @param tag
+   */
   onAddTag(tag: Tag | any): void {
     if (!this.tags.filter(t => t.value === tag.value).length) {
       this.tagsService.add(tag).subscribe((res: Tag) => {

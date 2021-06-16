@@ -182,8 +182,8 @@
               </div>
             </div>
           </div>
-          <h3 class="mb-4">Опыт на предыдущих местах работы</h3>
-          <div class="common" *ngFor="let fields of this.resume.extra.commonExperience; let i = index">
+          <h3 class="mb-4 mt-4">Опыт на предыдущих местах работы</h3>
+          <div class="common mb-5" *ngFor="let fields of this.resume.extra.commonExperience; let i = index">
             <fieldset ngModelGroup="common-{{i}}">
               <div class="point d-flex justify-content-between align-items-center"><span>{{i + 1}}.</span>
                 <button class="btn btn-warning" (click)="this.resume.extra.deleteCommonExperience(i)">Удалить</button>
@@ -234,7 +234,7 @@
                 <div class="col-8">
                   <input class="form-control" id="position-{{i}}" required name="position-{{i}}" type="text"
                          [(ngModel)]="fields.position" #position="ngModel">
-                  <div *ngIf="position.invalid && (position.dirty || position.touched)" class="alelrt">
+                  <div *ngIf="position.invalid && (position.dirty || position.touched)" class="alert">
                     <div *ngIf="position.errors?.required">Поле Наименование должности обязательно для заполнения</div>
                   </div>
                 </div>
@@ -253,7 +253,7 @@
             позицию
           </button>
           <h3 class="mb-4 mt-5">Опыт на проектах ланит</h3>
-          <div class="lanit" *ngFor="let fields of this.resume.extra.lanitExperience; let i = index">
+          <div class="lanit mb-5" *ngFor="let fields of this.resume.extra.lanitExperience; let i = index">
             <fieldset ngModelGroup="lanit-{{i}}">
               <div class="point d-flex justify-content-between align-items-center"><span>{{i + 1}}.</span>
                 <button class="btn btn-warning" (click)="this.resume.extra.deleteLanitExperience(i)">Удалить</button>
@@ -263,7 +263,7 @@
                 <div class="col-8">
                   <input class="form-control" id="project-{{i}}" type="text" [(ngModel)]="fields.project"
                          name="project-{{i}}" #lanitProject="ngModel" required>
-                  <div *ngIf="lanitProject.invalid && (lanitProject.dirty || lanitProject.touched)" class="alelrt">
+                  <div *ngIf="lanitProject.invalid && (lanitProject.dirty || lanitProject.touched)" class="alert">
                     <div *ngIf="lanitProject.errors?.required">Поле Наименование проекта обязательно для заполнения
                     </div>
                   </div>
@@ -274,7 +274,7 @@
                 <div class="col-8">
                   <input class="form-control" id="position-project-{{i}}" name="position-project-{{i}}"
                          #lanitPosition="ngModel" type="text" [(ngModel)]="fields.position">
-                  <div *ngIf="lanitPosition.invalid && (lanitPosition.dirty || lanitPosition.touched)" class="alelrt">
+                  <div *ngIf="lanitPosition.invalid && (lanitPosition.dirty || lanitPosition.touched)" class="alert">
                     <div *ngIf="lanitPosition.errors?.required">Поле Позиция на проекте обязательно для заполнения
                     </div>
                   </div>
@@ -289,7 +289,7 @@
                     <tag-input-dropdown [autocompleteItems]="tags">
                     </tag-input-dropdown>
                   </tag-input>
-                  <div *ngIf="lanitTags.invalid && (lanitTags.dirty || lanitTags.touched)" class="alelrt">
+                  <div *ngIf="lanitTags.invalid && (lanitTags.dirty || lanitTags.touched)" class="alert">
                     <div *ngIf="lanitTags.errors?.required">Поле Технологии обязательно для заполнения
                     </div>
                   </div>

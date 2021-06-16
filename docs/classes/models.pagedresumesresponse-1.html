@@ -75,29 +75,6 @@
 						<a href="#список-резюме-с-потсраничной-разбивкой-модель-ответа-от-севера" id="список-резюме-с-потсраничной-разбивкой-модель-ответа-от-севера" style="color: inherit; text-decoration: none;">
 							<h2>Список резюме с потсраничной разбивкой (модель ответа от севера)</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/pagedResumesResponse.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Type } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;
-<span class="hljs-keyword">import</span> { Resume } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./resume&#x27;</span>;
-<span class="hljs-comment">/** ## Список резюме с потсраничной разбивкой (модель ответа от севера)
- * [[include:1.md]]
- */</span>
-<span class="hljs-keyword">export</span>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PagedResumesResponse</span> </span>{
-  <span class="hljs-comment">/** Всего элесентов */</span>
-  <span class="hljs-attr">total</span>: <span class="hljs-built_in">number</span>;
-  <span class="hljs-comment">/** Номер текущей страницы */</span>
-  page: <span class="hljs-built_in">number</span>;
-  <span class="hljs-comment">/** Элементов на странице */</span>
-  perPage: <span class="hljs-built_in">number</span>;
-  <span class="hljs-meta">@Type</span>(<span class="hljs-function">() =&gt;</span> Resume)
-  <span class="hljs-comment">/** Массив элементов */</span>
-  <span class="hljs-attr">items</span>: Resume[];
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -117,8 +94,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagedresumesresponse-1.html#items" class="tsd-kind-icon">items</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagedresumesresponse-1.html#page" class="tsd-kind-icon">page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagedresumesresponse-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagedresumesresponse-1.html#tags" class="tsd-kind-icon">tags</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagedresumesresponse-1.html#total" class="tsd-kind-icon">total</a></li>
 							</ul>
 						</section>
@@ -133,37 +109,22 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <a href="models.resume-1.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagedResumesResponse.ts#L19">src/app/_models/pagedResumesResponse.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/paged-resumes-response.ts#L19">src/app/models/paged-resumes-response.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="page" class="tsd-anchor"></a>
-					<h3>page</h3>
-					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="tags" class="tsd-anchor"></a>
+					<h3>tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagedResumesResponse.ts#L14">src/app/_models/pagedResumesResponse.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/paged-resumes-response.ts#L21">src/app/models/paged-resumes-response.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Номер текущей страницы</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="perpage" class="tsd-anchor"></a>
-					<h3>per<wbr>Page</h3>
-					<div class="tsd-signature tsd-kind-icon">per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagedResumesResponse.ts#L16">src/app/_models/pagedResumesResponse.ts:16</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Элементов на странице</p>
+							<p>Теги включенные в фильтрацию</p>
 						</div>
 					</div>
 				</section>
@@ -173,7 +134,7 @@
 					<div class="tsd-signature tsd-kind-icon">total<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagedResumesResponse.ts#L12">src/app/_models/pagedResumesResponse.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/paged-resumes-response.ts#L15">src/app/models/paged-resumes-response.ts:15</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,6 +158,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -204,9 +168,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -218,12 +179,36 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#commonexperience" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#company" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#lanitexperience" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#pagedresumesresponse" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
@@ -237,6 +222,9 @@
 						<a href="../modules/models.html#resume" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#resumeextra" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#resumefilter" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -244,6 +232,15 @@
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#user" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.commonexperience-1.html" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.company-1.html" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.lanitexperience-1.html" class="tsd-kind-icon">Lanit<wbr>Experience</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -254,10 +251,7 @@
 								<a href="models.pagedresumesresponse-1.html#items" class="tsd-kind-icon">items</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagedresumesresponse-1.html#page" class="tsd-kind-icon">page</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagedresumesresponse-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a>
+								<a href="models.pagedresumesresponse-1.html#tags" class="tsd-kind-icon">tags</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="models.pagedresumesresponse-1.html#total" class="tsd-kind-icon">total</a>
@@ -276,6 +270,9 @@
 						<a href="models.resume-1.html" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.resumeextra-1.html" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resumefilter-1.html" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
@@ -283,6 +280,9 @@
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.user-1.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse-1" class="tsd-kind-icon">Login<wbr>Response</a>
 					</li>
 				</ul>
 			</nav>
@@ -294,8 +294,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

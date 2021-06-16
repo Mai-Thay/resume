@@ -73,25 +73,6 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>##Теги (ключевые навыки, технологии)</p>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/tag.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Expose } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;
-
-<span class="hljs-comment">/**
- * ##Теги (ключевые навыки, технологии)
- * [[include:6.md]]
- */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tag</span> </span>{
-  <span class="hljs-meta">@Expose</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span> })
-  <span class="hljs-attr">value</span>: <span class="hljs-built_in">number</span>;
-  <span class="hljs-meta">@Expose</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;value&#x27;</span> })
-  <span class="hljs-attr">display</span>: <span class="hljs-built_in">string</span>;
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -125,17 +106,17 @@
 					<div class="tsd-signature tsd-kind-icon">display<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/tag.ts#L15">src/app/_models/tag.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/tag.ts#L14">src/app/models/tag.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="value" class="tsd-anchor"></a>
 					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/tag.ts#L13">src/app/_models/tag.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/tag.ts#L12">src/app/models/tag.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,6 +135,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -161,9 +145,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -175,12 +156,36 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#commonexperience" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#company" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#lanitexperience" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#pagedresumesresponse" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
@@ -194,6 +199,9 @@
 						<a href="../modules/models.html#resume" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#resumeextra" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#resumefilter" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -201,6 +209,15 @@
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#user" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.commonexperience-1.html" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.company-1.html" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.lanitexperience-1.html" class="tsd-kind-icon">Lanit<wbr>Experience</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.pagedresumesresponse-1.html" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
@@ -213,6 +230,9 @@
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resume-1.html" class="tsd-kind-icon">Resume</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.resumeextra-1.html" class="tsd-kind-icon">Resume<wbr>Extra</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resumefilter-1.html" class="tsd-kind-icon">Resume<wbr>Filter</a>
@@ -235,6 +255,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.user-1.html" class="tsd-kind-icon">User</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse-1" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -245,8 +268,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

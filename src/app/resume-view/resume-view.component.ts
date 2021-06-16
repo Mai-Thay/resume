@@ -1,10 +1,17 @@
+/**
+ * @packageDocumentation
+ * @module ResumeView
+ */
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ResumesService} from '@app/_services';
-import {Resume} from '@app/_models';
+import {ResumesService} from '@app/services';
+import {Resume} from '@app/models';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+/**
+ * ## Компонент просмотра резюме другого пользователя
+ */
 @Component({
   selector: 'app-resume-view',
   templateUrl: './resume-view.component.html',
@@ -26,6 +33,9 @@ export class ResumeViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Сохранение резюме в формат pdf
+   */
   public openPDF(): void {
     let position = 0;
     const DATA = document.getElementById('resume');

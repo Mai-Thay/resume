@@ -8,10 +8,10 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ResumeListComponent} from '@app/resume-list';
 import {LoginComponent} from '@app/login';
-import {AuthGuard} from '@app/_guards';
+import {AuthGuard} from '@app/guards';
 import {ResumeViewComponent} from '@app/resume-view/resume-view.component';
 import {ResumeEditComponent} from '@app/resume-edit/resume-edit.component';
-import {Role} from '@app/_enums';
+import {Role} from '@app/enums';
 
 /**
  * ## Определение маршрутизации в приложении

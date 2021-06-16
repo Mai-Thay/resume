@@ -75,32 +75,6 @@
 						<a href="#базовый-класс-для-сервиса" id="базовый-класс-для-сервиса" style="color: inherit; text-decoration: none;">
 							<h2>Базовый класс для сервиса</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_services/base.service.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Services</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-keyword">import</span> {HttpClient} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/common/http&#x27;</span>;
-<span class="hljs-keyword">import</span> { Observable, <span class="hljs-keyword">of</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
-
-<span class="hljs-comment">/**
- * ## Базовый класс для сервиса
- * [[include:18.md]]
- */</span>
-<span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">&#x27;root&#x27;</span> })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BaseService</span> </span>{
-  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">protected</span> http: HttpClient</span>)</span> { }
-
-  <span class="hljs-keyword">protected</span> handleError&lt;T&gt;(operation = <span class="hljs-string">&#x27;operation&#x27;</span>, result?: T): <span class="hljs-built_in">any</span> {
-    <span class="hljs-keyword">return</span> (error: <span class="hljs-built_in">any</span>): Observable&lt;T&gt; =&gt; {
-      <span class="hljs-built_in">console</span>.error(operation, error);
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">of</span>(result <span class="hljs-keyword">as</span> T);
-    };
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -163,7 +137,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L14">src/app/_services/base.service.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L14">src/app/services/base.service.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -185,7 +159,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HttpClient</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L15">src/app/_services/base.service.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L15">src/app/services/base.service.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +176,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L17">src/app/_services/base.service.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L17">src/app/services/base.service.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -239,6 +213,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -248,9 +225,6 @@
 						<a href="../modules/helpers.html">Helpers</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -258,6 +232,18 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
@@ -318,8 +304,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

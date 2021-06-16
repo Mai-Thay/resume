@@ -75,37 +75,6 @@
 						<a href="#параметры-фильтрации-резюме" id="параметры-фильтрации-резюме" style="color: inherit; text-decoration: none;">
 							<h2>Параметры фильтрации резюме</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/resumeFilter.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-comment">/**
- * ## Параметры фильтрации резюме
- * [[include:5.md]]
- */</span>
-<span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">&#x27;root&#x27;</span> })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResumeFilter</span> </span>{
-  <span class="hljs-comment">/** Id направления вкотором работает специалист */</span>
-  profileId?: <span class="hljs-built_in">number</span>;
-  <span class="hljs-comment">/** Массив ID тегов основных технологий по которым нужно фильтровать резбме */</span>
-  tagsIds?: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;;
-
-  <span class="hljs-comment">/** Собирает параметры для запроса */</span>
-  <span class="hljs-keyword">get</span> <span class="hljs-title">httpParams</span>(): {[param: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]} {
-    <span class="hljs-keyword">const</span> params: {[param: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]} = {};
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.profileId !== <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-built_in">this</span>.profileId !== <span class="hljs-literal">undefined</span>) {
-     params.profileId = <span class="hljs-built_in">this</span>.profileId.toString();
-    }
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.tagsIds &amp;&amp; <span class="hljs-built_in">this</span>.tagsIds.length) {
-      params.tagsIds = <span class="hljs-built_in">this</span>.tagsIds.map(<span class="hljs-function">(<span class="hljs-params">t</span>) =&gt;</span> t.toString());
-    }
-    <span class="hljs-keyword">return</span> params;
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -124,8 +93,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resumefilter-1.html#profileid" class="tsd-kind-icon">profile<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resumefilter-1.html#tagsids" class="tsd-kind-icon">tags<wbr>Ids</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resumefilter-1.html#profile" class="tsd-kind-icon">profile</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resumefilter-1.html#responsetags" class="tsd-kind-icon">response<wbr>Tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resumefilter-1.html#tags" class="tsd-kind-icon">tags</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -134,18 +104,26 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="models.resumefilter-1.html#httpparams" class="tsd-kind-icon">http<wbr>Params</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.resumefilter-1.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.resumefilter-1.html#isinresponse" class="tsd-kind-icon">is<wbr>InResponse</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.resumefilter-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a></li>
+							</ul>
+						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="profileid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> profile<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">profile<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="profile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> profile</h3>
+					<div class="tsd-signature tsd-kind-icon">profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resumeFilter.ts#L13">src/app/_models/resumeFilter.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L13">src/app/models/resume-filter.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,17 +133,32 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="tagsids" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tags<wbr>Ids</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="responsetags" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> response<wbr>Tags</h3>
+					<div class="tsd-signature tsd-kind-icon">response<wbr>Tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resumeFilter.ts#L15">src/app/_models/resumeFilter.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L18">src/app/models/resume-filter.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Массив ID тегов основных технологий по которым нужно фильтровать резбме</p>
+							<p>Массив ID тегов для подсветки</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tags" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L15">src/app/models/resume-filter.ts:15</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Массив тегов основных технологий по которым нужно фильтровать резбме</p>
 						</div>
 					</div>
 				</section>
@@ -182,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resumeFilter.ts#L18">src/app/_models/resumeFilter.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L24">src/app/models/resume-filter.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -196,6 +189,76 @@
 									<h5><span class="tsd-signature-symbol">[</span>param: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L40">src/app/models/resume-filter.ts:40</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="isinresponse" class="tsd-anchor"></a>
+					<h3>is<wbr>InResponse</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>InResponse<span class="tsd-signature-symbol">(</span>tag<span class="tsd-signature-symbol">: </span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L36">src/app/models/resume-filter.ts:36</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Проверяем есть был ли тег добавлен только что, или по нему уже отфильтрованы значения</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tag: <a href="models.tag-1.html" class="tsd-signature-type">Tag</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onsubmit" class="tsd-anchor"></a>
+					<h3>on<wbr>Submit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Submit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume-filter.ts#L21">src/app/models/resume-filter.ts:21</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Выполнить по сабмиту</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -214,6 +277,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -221,9 +287,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -235,12 +298,36 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#commonexperience" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#company" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#lanitexperience" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#pagedresumesresponse" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
@@ -254,6 +341,9 @@
 						<a href="../modules/models.html#resume" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#resumeextra" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#resumefilter" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -261,6 +351,15 @@
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#user" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.commonexperience-1.html" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.company-1.html" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.lanitexperience-1.html" class="tsd-kind-icon">Lanit<wbr>Experience</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.pagedresumesresponse-1.html" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
@@ -274,19 +373,34 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resume-1.html" class="tsd-kind-icon">Resume</a>
 					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.resumeextra-1.html" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resumefilter-1.html" class="tsd-kind-icon">Resume<wbr>Filter</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resumefilter-1.html#profileid" class="tsd-kind-icon">profile<wbr>Id</a>
+								<a href="models.resumefilter-1.html#profile" class="tsd-kind-icon">profile</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resumefilter-1.html#tagsids" class="tsd-kind-icon">tags<wbr>Ids</a>
+								<a href="models.resumefilter-1.html#responsetags" class="tsd-kind-icon">response<wbr>Tags</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="models.resumefilter-1.html#tags" class="tsd-kind-icon">tags</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="models.resumefilter-1.html#httpparams" class="tsd-kind-icon">http<wbr>Params</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="models.resumefilter-1.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="models.resumefilter-1.html#isinresponse" class="tsd-kind-icon">is<wbr>InResponse</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="models.resumefilter-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a>
 							</li>
 						</ul>
 					</li>
@@ -298,6 +412,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.user-1.html" class="tsd-kind-icon">User</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse-1" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -308,12 +425,14 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

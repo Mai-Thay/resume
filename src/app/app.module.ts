@@ -10,7 +10,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppComponent} from '@app/app.component';
 import {AppRoutingModule} from '@app/app-routing.module';
-import {CookieInterceptor, ErrorInterceptor} from '@app/_interceptors';
+import {CookieInterceptor, ErrorInterceptor} from '@app/interceptors';
 import {ResumeListComponent} from '@app/resume-list';
 import {LoginComponent} from '@app/login';
 import {TagInputModule} from 'ngx-chips';
@@ -19,12 +19,12 @@ import {DtTableModule} from 'ngx-dt-table';
 import {NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {ResumeViewComponent} from '@app/resume-view';
-import {PerfectPhonePipe} from './_pipes/perfect-phone.pipe';
+import {PerfectPhonePipe} from '@app/pipes';
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import {ResumeEditComponent} from '@app/resume-edit';
-import {DatePickerComponent} from './_components/date-picker/date-picker.component';
 import {NgxMaskModule} from 'ngx-mask';
+import {HeaderComponent, DatePickerComponent} from '@app/components';
 
 
 registerLocaleData(localeRu);
@@ -51,7 +51,9 @@ registerLocaleData(localeRu);
     ResumeViewComponent,
     PerfectPhonePipe,
     ResumeEditComponent,
-    DatePickerComponent],
+    DatePickerComponent,
+    HeaderComponent,
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

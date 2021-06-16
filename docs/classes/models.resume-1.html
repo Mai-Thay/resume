@@ -75,43 +75,6 @@
 						<a href="#резюме-сотрудника" id="резюме-сотрудника" style="color: inherit; text-decoration: none;">
 							<h2>Резюме сотрудника</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/resume.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Type } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;
-<span class="hljs-keyword">import</span> { User } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./user&#x27;</span>;
-<span class="hljs-keyword">import</span> { Tag } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./tag&#x27;</span>;
-<span class="hljs-keyword">import</span> { Profile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./profile&#x27;</span>;
-
-<span class="hljs-comment">/**
- * ## Резюме сотрудника
- * [[include:4.md]]
- */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Resume</span> </span>{
-  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
-
-  <span class="hljs-meta">@Type</span>(<span class="hljs-function">() =&gt;</span> User)
-  <span class="hljs-attr">user</span>: User;
-
-  <span class="hljs-meta">@Type</span>(<span class="hljs-function">() =&gt;</span> Tag)
-  <span class="hljs-attr">tags</span>: Tag[];
-  name: <span class="hljs-built_in">string</span>;
-  secondName: <span class="hljs-built_in">string</span>;
-  lastName: <span class="hljs-built_in">string</span>;
-  birthday: <span class="hljs-built_in">string</span>;
-  location: <span class="hljs-built_in">string</span>;
-
-  <span class="hljs-meta">@Type</span>(<span class="hljs-function">() =&gt;</span> Profile)
-  <span class="hljs-attr">profile</span>: Profile;
-
-  <span class="hljs-keyword">public</span> getFIO(): <span class="hljs-built_in">string</span> {
-    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.lastName}</span> <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name[<span class="hljs-number">0</span>]}</span>. <span class="hljs-subst">${<span class="hljs-built_in">this</span>.secondName[<span class="hljs-number">0</span>]}</span>.`</span>;
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -128,139 +91,95 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#birthday" class="tsd-kind-icon">birthday</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#lastname" class="tsd-kind-icon">last<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#location" class="tsd-kind-icon">location</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#profile" class="tsd-kind-icon">profile</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#secondname" class="tsd-kind-icon">second<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#tags" class="tsd-kind-icon">tags</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#user" class="tsd-kind-icon">user</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="models.resume-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.resume-1.html#getfio" class="tsd-kind-icon">getFIO</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#extra" class="tsd-kind-icon">extra</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#profiles" class="tsd-kind-icon">profiles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#tags" class="tsd-kind-icon">tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.resume-1.html#userid" class="tsd-kind-icon">user<wbr>Id</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="birthday" class="tsd-anchor"></a>
-					<h3>birthday</h3>
-					<div class="tsd-signature tsd-kind-icon">birthday<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L25">src/app/_models/resume.ts:25</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L15">src/app/_models/resume.ts:15</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="lastname" class="tsd-anchor"></a>
-					<h3>last<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">last<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L24">src/app/_models/resume.ts:24</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="location" class="tsd-anchor"></a>
-					<h3>location</h3>
-					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L26">src/app/_models/resume.ts:26</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L22">src/app/_models/resume.ts:22</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="profile" class="tsd-anchor"></a>
-					<h3>profile</h3>
-					<div class="tsd-signature tsd-kind-icon">profile<span class="tsd-signature-symbol">:</span> <a href="models.profile-1.html" class="tsd-signature-type">Profile</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L29">src/app/_models/resume.ts:29</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="secondname" class="tsd-anchor"></a>
-					<h3>second<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">second<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L23">src/app/_models/resume.ts:23</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="tags" class="tsd-anchor"></a>
-					<h3>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L21">src/app/_models/resume.ts:21</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="user" class="tsd-anchor"></a>
-					<h3>user</h3>
-					<div class="tsd-signature tsd-kind-icon">user<span class="tsd-signature-symbol">:</span> <a href="models.user-1.html" class="tsd-signature-type">User</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L18">src/app/_models/resume.ts:18</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getfio" class="tsd-anchor"></a>
-					<h3>getFIO</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">getFIO<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Resume<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="models.resume-1.html" class="tsd-signature-type">Resume</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/resume.ts#L31">src/app/_models/resume.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L21">src/app/models/resume.ts:21</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="models.resume-1.html" class="tsd-signature-type">Resume</a></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="extra" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> extra</h3>
+					<div class="tsd-signature tsd-kind-icon">extra<span class="tsd-signature-symbol">:</span> <a href="models.resumeextra-1.html" class="tsd-signature-type">ResumeExtra</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L21">src/app/models/resume.ts:21</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L14">src/app/models/resume.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="profiles" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> profiles</h3>
+					<div class="tsd-signature tsd-kind-icon">profiles<span class="tsd-signature-symbol">:</span> <a href="models.profile-1.html" class="tsd-signature-type">Profile</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L19">src/app/models/resume.ts:19</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tags" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L17">src/app/models/resume.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="userid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/resume.ts#L15">src/app/models/resume.ts:15</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -277,6 +196,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -284,9 +206,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -298,12 +217,36 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#commonexperience" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#company" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#lanitexperience" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#pagedresumesresponse" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
@@ -317,6 +260,9 @@
 						<a href="../modules/models.html#resume" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#resumeextra" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#resumefilter" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -324,6 +270,15 @@
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#user" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.commonexperience-1.html" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.company-1.html" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.lanitexperience-1.html" class="tsd-kind-icon">Lanit<wbr>Experience</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.pagedresumesresponse-1.html" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
@@ -339,40 +294,31 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resume-1.html" class="tsd-kind-icon">Resume</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="models.resume-1.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#birthday" class="tsd-kind-icon">birthday</a>
+								<a href="models.resume-1.html#extra" class="tsd-kind-icon">extra</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="models.resume-1.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#lastname" class="tsd-kind-icon">last<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#location" class="tsd-kind-icon">location</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#profile" class="tsd-kind-icon">profile</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#secondname" class="tsd-kind-icon">second<wbr>Name</a>
+								<a href="models.resume-1.html#profiles" class="tsd-kind-icon">profiles</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="models.resume-1.html#tags" class="tsd-kind-icon">tags</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.resume-1.html#user" class="tsd-kind-icon">user</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="models.resume-1.html#getfio" class="tsd-kind-icon">getFIO</a>
+								<a href="models.resume-1.html#userid" class="tsd-kind-icon">user<wbr>Id</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.resumeextra-1.html" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resumefilter-1.html" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
@@ -381,6 +327,9 @@
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.user-1.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse-1" class="tsd-kind-icon">Login<wbr>Response</a>
 					</li>
 				</ul>
 			</nav>
@@ -392,13 +341,14 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

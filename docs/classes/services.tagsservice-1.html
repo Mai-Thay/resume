@@ -75,33 +75,6 @@
 						<a href="#сервис-для-работы-с-тегами" id="сервис-для-работы-с-тегами" style="color: inherit; text-decoration: none;">
 							<h2>Сервис для работы с Тегами</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_services/tags.service.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Services</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-keyword">import</span> { environment } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@environments/environment&#x27;</span>;
-<span class="hljs-keyword">import</span> { Tag } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_models&#x27;</span>;
-<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
-<span class="hljs-keyword">import</span> { catchError, map } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/operators&#x27;</span>;
-<span class="hljs-keyword">import</span> { BaseService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_services/base.service&#x27;</span>;
-<span class="hljs-keyword">import</span> { plainToClass } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;class-transformer&#x27;</span>;
-
-<span class="hljs-comment">/** ## Сервис для работы с Тегами
- * [[include:21.md]]
- */</span>
-<span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">&#x27;root&#x27;</span> })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TagsService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseService</span></span>{
-  getList(): Observable&lt;Tag[]&gt; {
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.http.get&lt;Tag[]&gt;(<span class="hljs-string">`<span class="hljs-subst">${environment.apiUrl}</span>/tags`</span>).pipe(
-      map(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> plainToClass(Tag, response)),
-      catchError(<span class="hljs-built_in">this</span>.handleError(<span class="hljs-string">&#x27;getTags&#x27;</span>, []))
-    );
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -137,6 +110,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="services.tagsservice-1.html#add" class="tsd-kind-icon">add</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="services.tagsservice-1.html#getlist" class="tsd-kind-icon">get<wbr>List</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected"><a href="services.tagsservice-1.html#handleerror" class="tsd-kind-icon">handle<wbr>Error</a></li>
 							</ul>
@@ -157,7 +131,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="services.baseservice.html">BaseService</a>.<a href="services.baseservice.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L14">src/app/_services/base.service.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L14">src/app/services/base.service.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -180,13 +154,36 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="services.baseservice.html">BaseService</a>.<a href="services.baseservice.html#http">http</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L15">src/app/_services/base.service.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L15">src/app/services/base.service.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="add" class="tsd-anchor"></a>
+					<h3>add</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>tag<span class="tsd-signature-symbol">: </span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/tags.service.ts#L25">src/app/services/tags.service.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tag: <a href="models.tag-1.html" class="tsd-signature-type">Tag</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getlist" class="tsd-anchor"></a>
 					<h3>get<wbr>List</h3>
@@ -197,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/tags.service.ts#L18">src/app/_services/tags.service.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/tags.service.ts#L18">src/app/services/tags.service.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><a href="models.tag-1.html" class="tsd-signature-type">Tag</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -215,7 +212,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="services.baseservice.html">BaseService</a>.<a href="services.baseservice.html#handleerror">handleError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_services/base.service.ts#L17">src/app/_services/base.service.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/services/base.service.ts#L17">src/app/services/base.service.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -252,6 +249,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -261,9 +261,6 @@
 						<a href="../modules/helpers.html">Helpers</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -271,6 +268,18 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
@@ -315,6 +324,9 @@
 								<a href="services.tagsservice-1.html#http" class="tsd-kind-icon">http</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="services.tagsservice-1.html#add" class="tsd-kind-icon">add</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="services.tagsservice-1.html#getlist" class="tsd-kind-icon">get<wbr>List</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected">
@@ -334,8 +346,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

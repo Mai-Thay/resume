@@ -81,37 +81,9 @@
 				<a href="#работа-с-документацией" id="работа-с-документацией" style="color: inherit; text-decoration: none;">
 					<h2>Работа с документацией</h2>
 				</a>
-				<p>Докумнтация генерируется автоматически на основаниии типизации и комментариев к коду в формате <strong>[typedoc][<a href="https://typedoc.org/guides/installation/%5D">https://typedoc.org/guides/installation/]</a></strong> - документация по ссылке</p>
+				<p>Докумeнтация генерируется автоматически на основаниии типизации из комментариев к коду в формате <strong>[typedoc][<a href="https://typedoc.org/guides/installation/%5D">https://typedoc.org/guides/installation/]</a></strong> - документация по ссылке</p>
 				<p>Команда для запуска генерации документации:</p>
 				<pre><code class="language-bash">npm run typedoc
-</code></pre>
-				<p>Так же в комментариик коду можно размещать разметку в стиле markdown</p>
-				<p>Настроена автоматическая выгрузка кода компоненов в разметку маркдаун для отображения в документации</p>
-				<p>Команда для импорта кода компонентов в файлы .md:</p>
-				<pre><code class="language-bash">npx embedme includes/*.md
-</code></pre>
-				<p>Для того чтоб создать файл с разметкой аналогичной коду в компоненте или шаблоне, необходимо добавить в диракторию /includes файд someMame.md</p>
-				<p>В файле роазмещается любая маркдаун размента, а так же для импорта кода используются следующие конструкции:</p>
-				<p>```ts
-					// ../src/app/_models/resumeFilter.ts
-				``` </p>
-				<p>Путь  в нужному фaйлe указывается относительно директории includes, в которой лежать все вспомогательные файлы разметки. Чтоб подключить разметку в документацию, импользуйте следующую конструкцию:</p>
-				<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/profile.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-
-<span class="hljs-comment">/**
- * ## Направление, в котором работает программист
- * [[include:3.md]]
- */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Profile</span> </span>{
-  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
-  code: <span class="hljs-built_in">string</span>;
-  text: <span class="hljs-built_in">string</span>;
-}
 </code></pre>
 			</div>
 		</div>
@@ -128,6 +100,9 @@
 						<a href="modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -137,9 +112,6 @@
 						<a href="modules/helpers.html">Helpers</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/homepage.html">Home<wbr>Page</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="modules/interceptors.html">Interceptors</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -147,6 +119,18 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/resumeslist.html">Resumes<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/services.html">Services</a>
@@ -165,8 +149,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

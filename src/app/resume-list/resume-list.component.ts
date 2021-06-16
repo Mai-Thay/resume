@@ -1,10 +1,10 @@
 /**
  * @packageDocumentation
- * @module HomePage
+ * @module ResumesList
  */
 import { Component, OnInit } from '@angular/core';
-import { User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesResponse } from '@app/_models';
-import { ResumesService, AuthenticationService, TagsService, ProfilesService } from '@app/_services';
+import { User, Resume, Tag, Profile, Pagination, ResumeFilter, PagedResumesResponse } from '@app/models';
+import { ResumesService, AuthenticationService, TagsService, ProfilesService } from '@app/services';
 import { Router } from '@angular/router';
 
 /**

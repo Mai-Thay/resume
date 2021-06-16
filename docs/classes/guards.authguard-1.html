@@ -76,42 +76,6 @@
 							<h2>AuthGuard</h2>
 						</a>
 						<p>Ограничение доступа к маршрутам по признаку авторизованности пользователя</p>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_guards/auth.guard.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Guards</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-keyword">import</span> { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/router&#x27;</span>;
-<span class="hljs-keyword">import</span> { AuthenticationService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_services&#x27;</span>;
-
-<span class="hljs-comment">/**
- * ## AuthGuard
- * Ограничение достпа с маршрутам по признаку авторизованности пользователя
- * [[include:8.md]]
- */</span>
-<span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">&#x27;root&#x27;</span> })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthGuard</span> <span class="hljs-title">implements</span> <span class="hljs-title">CanActivate</span> </span>{
-    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">
-        <span class="hljs-keyword">private</span> router: Router,
-        <span class="hljs-keyword">private</span> authenticationService: AuthenticationService
-    </span>)</span> { }
-
-    canActivate(route: ActivatedRouteSnapshot, <span class="hljs-attr">state</span>: RouterStateSnapshot): <span class="hljs-built_in">boolean</span> {
-        <span class="hljs-keyword">const</span> user = <span class="hljs-built_in">this</span>.authenticationService.userValue;
-        <span class="hljs-keyword">if</span> (user) {
-            <span class="hljs-keyword">if</span> (route.data.roles &amp;&amp; route.data.roles.indexOf(user.role) === -<span class="hljs-number">1</span>) {
-                <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/&#x27;</span>]);
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-            }
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-        }
-        <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/login&#x27;</span>], { <span class="hljs-attr">queryParams</span>: { <span class="hljs-attr">returnUrl</span>: state.url } });
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -139,11 +103,13 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="guards.authguard-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="guards.authguard-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="guards.authguard-1.html#isauth" class="tsd-kind-icon">is<wbr>Auth</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="guards.authguard-1.html#router" class="tsd-kind-icon">router</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="guards.authguard-1.html#userroles" class="tsd-kind-icon">user<wbr>Roles</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -167,7 +133,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_guards/auth.guard.ts#L15">src/app/_guards/auth.guard.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L16">src/app/guards/auth.guard.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -184,7 +150,7 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="authenticationservice" class="tsd-anchor"></a>
@@ -192,7 +158,17 @@
 					<div class="tsd-signature tsd-kind-icon">authentication<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_guards/auth.guard.ts#L18">src/app/_guards/auth.guard.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L20">src/app/guards/auth.guard.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="isauth" class="tsd-anchor"></a>
+					<h3>is<wbr>Auth</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Auth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L16">src/app/guards/auth.guard.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +178,17 @@
 					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_guards/auth.guard.ts#L17">src/app/_guards/auth.guard.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L19">src/app/guards/auth.guard.ts:19</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="userroles" class="tsd-anchor"></a>
+					<h3>user<wbr>Roles</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Roles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L15">src/app/guards/auth.guard.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -219,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_guards/auth.guard.ts#L21">src/app/_guards/auth.guard.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/guards/auth.guard.ts#L26">src/app/guards/auth.guard.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -250,6 +236,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class="current tsd-kind-module">
@@ -259,9 +248,6 @@
 						<a href="../modules/helpers.html">Helpers</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
-					</li>
-					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -269,6 +255,18 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/models.html">Models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
@@ -291,8 +289,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="guards.authguard-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="guards.authguard-1.html#isauth" class="tsd-kind-icon">is<wbr>Auth</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="guards.authguard-1.html#router" class="tsd-kind-icon">router</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="guards.authguard-1.html#userroles" class="tsd-kind-icon">user<wbr>Roles</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="guards.authguard-1.html#canactivate" class="tsd-kind-icon">can<wbr>Activate</a>
@@ -313,11 +317,13 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

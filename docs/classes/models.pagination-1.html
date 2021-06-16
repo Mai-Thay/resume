@@ -75,66 +75,6 @@
 						<a href="#параметры-постраничной-навигации-и-сортировки" id="параметры-постраничной-навигации-и-сортировки" style="color: inherit; text-decoration: none;">
 							<h2>Параметры постраничной навигации и сортировки</h2>
 						</a>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_models/pagination.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Models</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { SortDir } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_enums&#x27;</span>;
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-
-<span class="hljs-comment">/** ## Параметры постраничной навигации и сортировки
- * [[include:2.md]]
- */</span>
-<span class="hljs-meta">@Injectable</span>({ <span class="hljs-attr">providedIn</span>: <span class="hljs-string">&#x27;root&#x27;</span> })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pagination</span> </span>{
-  <span class="hljs-comment">/** Номер текущей страницы */</span>
-  page = <span class="hljs-number">1</span>;
-  <span class="hljs-comment">/** Элементов на странице */</span>
-  perPage = <span class="hljs-number">5</span>;
-
-  <span class="hljs-comment">/** Имя поля по которому должна осущетсвляться сортировка */</span>
-  sortBy?: <span class="hljs-built_in">string</span>;
-
-  <span class="hljs-comment">/** Направление сотрировки */</span>
-  sortDir?: keyof <span class="hljs-keyword">typeof</span> SortDir;
-
-  <span class="hljs-comment">/** Общее количество элементов списка */</span>
-  total = <span class="hljs-number">0</span>;
-
-   <span class="hljs-comment">/** Идентификатор загрузки */</span>
-  isLoading = <span class="hljs-literal">true</span>;
-
-  <span class="hljs-comment">/** Собирает параметры для запроса */</span>
-  <span class="hljs-keyword">get</span> <span class="hljs-title">httpParams</span>(): {[param: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]} {
-    <span class="hljs-keyword">const</span> params: {[param: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]} = {
-      <span class="hljs-attr">page</span>: <span class="hljs-built_in">this</span>.page.toString(),
-      <span class="hljs-attr">perPage</span>: <span class="hljs-built_in">this</span>.perPage.toString(),
-    };
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.sortBy) {
-      params.sortBy = <span class="hljs-built_in">this</span>.sortBy;
-      params.sortDir = !!<span class="hljs-built_in">this</span>.sortDir ? SortDir[<span class="hljs-built_in">this</span>.sortDir] : SortDir.asc;
-    }
-    <span class="hljs-keyword">return</span> params;
-  }
-
-  <span class="hljs-comment">/** Переключает сортировку на противополодное направление */</span>
-  <span class="hljs-keyword">public</span> switchSort(): <span class="hljs-built_in">void</span> {
-    <span class="hljs-keyword">if</span> (!!<span class="hljs-built_in">this</span>.sortDir &amp;&amp; SortDir[<span class="hljs-built_in">this</span>.sortDir] === SortDir.asc) {
-      <span class="hljs-built_in">this</span>.sortDir = SortDir[SortDir.desc];
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-built_in">this</span>.sortDir = SortDir[SortDir.asc];
-    }
-  }
-
-  <span class="hljs-comment">/** Очищает параметры сорировки */</span>
-  <span class="hljs-keyword">public</span> clearSort(): <span class="hljs-built_in">void</span> {
-    <span class="hljs-built_in">this</span>.sortBy = <span class="hljs-literal">null</span>;
-    <span class="hljs-built_in">this</span>.sortDir = <span class="hljs-literal">null</span>;
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -153,11 +93,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="models.pagination-1.html#_page" class="tsd-kind-icon">$page</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="models.pagination-1.html#_perpage" class="tsd-kind-icon">$per<wbr>Page</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#isloading" class="tsd-kind-icon">is<wbr>Loading</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#page" class="tsd-kind-icon">page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#sortby" class="tsd-kind-icon">sort<wbr>By</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#sortdir" class="tsd-kind-icon">sort<wbr>Dir</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#perpagevariants" class="tsd-kind-icon">per<wbr>Page<wbr>Variants</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="models.pagination-1.html#total" class="tsd-kind-icon">total</a></li>
 							</ul>
 						</section>
@@ -165,13 +104,14 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="models.pagination-1.html#httpparams" class="tsd-kind-icon">http<wbr>Params</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="models.pagination-1.html#page" class="tsd-kind-icon">page</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="models.pagination-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.pagination-1.html#clearsort" class="tsd-kind-icon">clear<wbr>Sort</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.pagination-1.html#switchsort" class="tsd-kind-icon">switch<wbr>Sort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="models.pagination-1.html#onchange" class="tsd-kind-icon">on<wbr>Change</a></li>
 							</ul>
 						</section>
 					</div>
@@ -179,28 +119,13 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="isloading" class="tsd-anchor"></a>
-					<h3>is<wbr>Loading</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_page" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> $page</h3>
+					<div class="tsd-signature tsd-kind-icon">$page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L28">src/app/_models/pagination.ts:28</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Идентификатор загрузки</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="page" class="tsd-anchor"></a>
-					<h3>page</h3>
-					<div class="tsd-signature tsd-kind-icon">page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L14">src/app/_models/pagination.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L11">src/app/models/pagination.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -209,13 +134,13 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="perpage" class="tsd-anchor"></a>
-					<h3>per<wbr>Page</h3>
-					<div class="tsd-signature tsd-kind-icon">per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 5</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_perpage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> $per<wbr>Page</h3>
+					<div class="tsd-signature tsd-kind-icon">$per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 10</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L16">src/app/_models/pagination.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L13">src/app/models/pagination.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -225,32 +150,32 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="sortby" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sort<wbr>By</h3>
-					<div class="tsd-signature tsd-kind-icon">sort<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="isloading" class="tsd-anchor"></a>
+					<h3>is<wbr>Loading</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L19">src/app/_models/pagination.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L19">src/app/models/pagination.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Имя поля по которому должна осущетсвляться сортировка</p>
+							<p>Идентификатор загрузки</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="sortdir" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sort<wbr>Dir</h3>
-					<div class="tsd-signature tsd-kind-icon">sort<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">SortDir</span></div>
+					<a name="perpagevariants" class="tsd-anchor"></a>
+					<h3>per<wbr>Page<wbr>Variants</h3>
+					<div class="tsd-signature tsd-kind-icon">per<wbr>Page<wbr>Variants<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [5, 10, 20, 30]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L22">src/app/_models/pagination.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L22">src/app/models/pagination.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Направление сотрировки</p>
+							<p>Варианты отображения элементов на странице</p>
 						</div>
 					</div>
 				</section>
@@ -260,7 +185,7 @@
 					<div class="tsd-signature tsd-kind-icon">total<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L25">src/app/_models/pagination.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L16">src/app/models/pagination.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -282,7 +207,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L31">src/app/_models/pagination.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L46">src/app/models/pagination.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -299,47 +224,89 @@
 						</li>
 					</ul>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="clearsort" class="tsd-anchor"></a>
-					<h3>clear<wbr>Sort</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">clear<wbr>Sort<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="page" class="tsd-anchor"></a>
+					<h3>page</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> page<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> page<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L53">src/app/_models/pagination.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L27">src/app/models/pagination.ts:27</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Очищает параметры сорировки</p>
-								</div>
-							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L31">src/app/models/pagination.ts:31</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>page: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="switchsort" class="tsd-anchor"></a>
-					<h3>switch<wbr>Sort</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">switch<wbr>Sort<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="perpage" class="tsd-anchor"></a>
+					<h3>per<wbr>Page</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> perPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> perPage<span class="tsd-signature-symbol">(</span>perPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_models/pagination.ts#L44">src/app/_models/pagination.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L36">src/app/models/pagination.ts:36</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L40">src/app/models/pagination.ts:40</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>perPage: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="onchange" class="tsd-anchor"></a>
+					<h3>on<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/models/pagination.ts#L25">src/app/models/pagination.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Переключает сортировку на противополодное направление</p>
+									<p>Коллбэк выполняемый при обновлении страницы/сортировки/колличества элементов на тсранице</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -361,6 +328,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -368,9 +338,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -382,12 +349,36 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#commonexperience" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#company" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#lanitexperience" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse" class="tsd-kind-icon">Login<wbr>Response</a>
+					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#pagedresumesresponse" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
@@ -401,6 +392,9 @@
 						<a href="../modules/models.html#resume" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/models.html#resumeextra" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="../modules/models.html#resumefilter" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -410,6 +404,15 @@
 						<a href="../modules/models.html#user" class="tsd-kind-icon">User</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.commonexperience-1.html" class="tsd-kind-icon">Common<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.company-1.html" class="tsd-kind-icon">Company</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.lanitexperience-1.html" class="tsd-kind-icon">Lanit<wbr>Experience</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.pagedresumesresponse-1.html" class="tsd-kind-icon">Paged<wbr>Resumes<wbr>Response</a>
 					</li>
 				</ul>
@@ -417,20 +420,17 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="models.pagination-1.html" class="tsd-kind-icon">Pagination</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="models.pagination-1.html#_page" class="tsd-kind-icon">$page</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="models.pagination-1.html#_perpage" class="tsd-kind-icon">$per<wbr>Page</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="models.pagination-1.html#isloading" class="tsd-kind-icon">is<wbr>Loading</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagination-1.html#page" class="tsd-kind-icon">page</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagination-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagination-1.html#sortby" class="tsd-kind-icon">sort<wbr>By</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="models.pagination-1.html#sortdir" class="tsd-kind-icon">sort<wbr>Dir</a>
+								<a href="models.pagination-1.html#perpagevariants" class="tsd-kind-icon">per<wbr>Page<wbr>Variants</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="models.pagination-1.html#total" class="tsd-kind-icon">total</a>
@@ -438,11 +438,14 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="models.pagination-1.html#httpparams" class="tsd-kind-icon">http<wbr>Params</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="models.pagination-1.html#clearsort" class="tsd-kind-icon">clear<wbr>Sort</a>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="models.pagination-1.html#page" class="tsd-kind-icon">page</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="models.pagination-1.html#perpage" class="tsd-kind-icon">per<wbr>Page</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="models.pagination-1.html#switchsort" class="tsd-kind-icon">switch<wbr>Sort</a>
+								<a href="models.pagination-1.html#onchange" class="tsd-kind-icon">on<wbr>Change</a>
 							</li>
 						</ul>
 					</li>
@@ -455,6 +458,9 @@
 						<a href="models.resume-1.html" class="tsd-kind-icon">Resume</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="models.resumeextra-1.html" class="tsd-kind-icon">Resume<wbr>Extra</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.resumefilter-1.html" class="tsd-kind-icon">Resume<wbr>Filter</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
@@ -462,6 +468,9 @@
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="models.user-1.html" class="tsd-kind-icon">User</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/models.html#loginresponse-1" class="tsd-kind-icon">Login<wbr>Response</a>
 					</li>
 				</ul>
 			</nav>
@@ -476,13 +485,18 @@
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 		</div>
 	</div>

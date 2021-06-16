@@ -76,38 +76,6 @@
 							<h2>ErrorInterceptor</h2>
 						</a>
 						<p>Перехватывает ошибки в ответах от сервера</p>
-						<pre><code class="language-ts"><span class="hljs-comment">// ../src/app/_interceptors/error.interceptor.ts</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@packageDocumentation</span>
- * <span class="hljs-doctag">@module <span class="hljs-variable">Interceptors</span></span>
- */</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/core&#x27;</span>;
-<span class="hljs-keyword">import</span> { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@angular/common/http&#x27;</span>;
-<span class="hljs-keyword">import</span> { Observable, throwError } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs&#x27;</span>;
-<span class="hljs-keyword">import</span> { catchError } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;rxjs/operators&#x27;</span>;
-<span class="hljs-keyword">import</span> { AuthenticationService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@app/_services&#x27;</span>;
-
-<span class="hljs-comment">/** ## ErrorInterceptor
- * Перехватывает ошибки в ответах от сервера
- * [[include:9.md]]
- */</span>
-
-<span class="hljs-meta">@Injectable</span>()
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ErrorInterceptor</span> <span class="hljs-title">implements</span> <span class="hljs-title">HttpInterceptor</span> </span>{
-  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> authenticationService: AuthenticationService</span>)</span> { }
-
-  intercept(request: HttpRequest&lt;<span class="hljs-built_in">any</span>&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;<span class="hljs-built_in">any</span>&gt;&gt; {
-    <span class="hljs-keyword">return</span> next.handle(request).pipe(catchError(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-      <span class="hljs-keyword">if</span> ([<span class="hljs-number">401</span>, <span class="hljs-number">403</span>].indexOf(err.status) !== -<span class="hljs-number">1</span>) {
-        <span class="hljs-built_in">this</span>.authenticationService.logout();
-      }
-      <span class="hljs-keyword">const</span> error = err.error.message || err.statusText;
-      <span class="hljs-keyword">return</span> throwError(error);
-    }));
-  }
-}
-</code></pre>
 					</div>
 				</div>
 			</section>
@@ -139,6 +107,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="interceptors.errorinterceptor-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="interceptors.errorinterceptor-1.html#router" class="tsd-kind-icon">router</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -156,19 +125,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Error<wbr>Interceptor<span class="tsd-signature-symbol">(</span>authenticationService<span class="tsd-signature-symbol">: </span><a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interceptors.errorinterceptor-1.html" class="tsd-signature-type">ErrorInterceptor</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Error<wbr>Interceptor<span class="tsd-signature-symbol">(</span>authenticationService<span class="tsd-signature-symbol">: </span><a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a>, router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interceptors.errorinterceptor-1.html" class="tsd-signature-type">ErrorInterceptor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_interceptors/error.interceptor.ts#L17">src/app/_interceptors/error.interceptor.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/interceptors/error.interceptor.ts#L17">src/app/interceptors/error.interceptor.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>authenticationService: <a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a></h5>
+								</li>
+								<li>
+									<h5>router: <span class="tsd-signature-type">Router</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="interceptors.errorinterceptor-1.html" class="tsd-signature-type">ErrorInterceptor</a></h4>
@@ -184,7 +156,17 @@
 					<div class="tsd-signature tsd-kind-icon">authentication<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="services.authenticationservice-1.html" class="tsd-signature-type">AuthenticationService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_interceptors/error.interceptor.ts#L18">src/app/_interceptors/error.interceptor.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/interceptors/error.interceptor.ts#L18">src/app/interceptors/error.interceptor.ts:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="router" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> router</h3>
+					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/interceptors/error.interceptor.ts#L18">src/app/interceptors/error.interceptor.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +183,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/e25428a/src/app/_interceptors/error.interceptor.ts#L20">src/app/_interceptors/error.interceptor.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/Mai-Thay/resume/blob/9e61d67/src/app/interceptors/error.interceptor.ts#L21">src/app/interceptors/error.interceptor.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -232,6 +214,9 @@
 						<a href="../modules/approutingmodule.html">App<wbr>Routing<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/components.html">Components</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/enums.html">Enums</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -239,9 +224,6 @@
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/helpers.html">Helpers</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/homepage.html">Home<wbr>Page</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/interceptors.html">Interceptors</a>
@@ -253,6 +235,18 @@
 						<a href="../modules/models.html">Models</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/pipes.html">Pipes</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeedit.html">Resume<wbr>Edit</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeview.html">Resume<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/resumeslist.html">Resumes<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/services.html">Services</a>
 					</li>
 				</ul>
@@ -260,10 +254,13 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/interceptors.html#errorinterceptor" class="tsd-kind-icon">Error<wbr>Interceptor</a>
+						<a href="../modules/interceptors.html#cookieinterceptor" class="tsd-kind-icon">Cookie<wbr>Interceptor</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/interceptors.html#jwtinterceptor" class="tsd-kind-icon">Jwt<wbr>Interceptor</a>
+						<a href="../modules/interceptors.html#errorinterceptor" class="tsd-kind-icon">Error<wbr>Interceptor</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="interceptors.cookieinterceptor-1.html" class="tsd-kind-icon">Cookie<wbr>Interceptor</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -276,6 +273,9 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="interceptors.errorinterceptor-1.html#authenticationservice" class="tsd-kind-icon">authentication<wbr>Service</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="interceptors.errorinterceptor-1.html#router" class="tsd-kind-icon">router</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="interceptors.errorinterceptor-1.html#intercept" class="tsd-kind-icon">intercept</a>
 							</li>
@@ -283,9 +283,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="interceptors.jwtinterceptor-1.html" class="tsd-kind-icon">Jwt<wbr>Interceptor</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -296,13 +293,14 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
