@@ -1,0 +1,42 @@
+image: trion/ng-cli
+
+stages:
+  - buildqa
+  - buildprod
+
+# Pick zero or more services to be used on all builds.
+# Only needed when using a docker container to run your tests in.
+# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
+#services:
+#  - mysql:latest
+#  - redis:latest
+#  - postgres:latest
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+buildqa:
+  stage: buildqa
+  script:
+    - npm i
+    - ng build
+    - rm -rf /opt/shared/cv-front/develop/*
+    - cp -r dist/* /opt/shared/cv-front/develop
+    - rm -rf dist/
+  only:
+    - develop
+
+buildprod:
+  stage: buildprod
+  script:
+    - npm i
+    - ng build
+    - rm -rf /opt/shared/cv-front/master/*
+    - cp -r dist/* /opt/shared/cv-front/master
+    - rm -rf dist/
+  when: manual
+  only: 
+    - master
