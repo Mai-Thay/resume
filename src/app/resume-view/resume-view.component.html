@@ -62,10 +62,12 @@
         </div>
         <div class="contact-item d-flex align-items-center pb-2">
           <div class="col-form-label font-weight-bold w-40">Ключевые навыки:</div>
-          <span class="btn btn-sm mr-1 my-1 btn-info"
-                *ngFor="let tag of resume.tags;">
-            {{tag.display}}
-          </span>
+          <div class="w-60">
+            <span class="btn btn-sm mr-1 my-1 btn-info "
+                  *ngFor="let tag of resume.tags;">
+              {{tag.display}}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -107,7 +109,7 @@
                 {{ exp.position }}</div>
               <div class="pb-2">
                 <div class="col-form-label font-weight-bold w-40">Описание:</div>
-                <pre>{{exp.description}}</pre>
+                <pre class="pre-text">{{exp.description}}</pre>
               </div>
             </td>
           </tr>
@@ -123,7 +125,7 @@
         <table class="table table-striped">
           <thead *ngIf="!isLoading && resume?.extra?.lanitExperience.length">
           <tr>
-            <th>Наименование проекта</th>
+            <th class="w-40">Наименование проекта</th>
             <th>Должность на проекте</th>
             <th>Используемые технологии</th>
           </tr>

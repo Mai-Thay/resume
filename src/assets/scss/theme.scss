@@ -4,7 +4,8 @@ body, html {
   flex: 1;
   align-items: stretch;
   flex-direction: column;
-  }
+  position: relative;
+}
 
 app-resume, .wrapper {
   display: flex;
@@ -22,7 +23,7 @@ app-resume, .wrapper {
 }
 
 .card, .header {
-  &-opacity  {
+  &-opacity {
     background-color: rgba(0, 0, 0, 0.8);
   }
 }
@@ -54,17 +55,18 @@ app-resume, .wrapper {
 .asc:after {
   content: '\21D1';
 }
+
 $width: () !default;
 $width: map-merge(
     (
       "100": 100%,
-      "80":  80%,
-      "60":  60%,
-      "50":  50%,
-      "40":  40%,
-      "20":  20%,
-      "10":  10%,
-      "5":  5%,
+      "80": 80%,
+      "60": 60%,
+      "50": 50%,
+      "40": 40%,
+      "20": 20%,
+      "10": 10%,
+      "5": 5%,
     ),
     $width
 );
@@ -92,10 +94,11 @@ $width: map-merge(
   }
 }
 
-tag-input#tags {
+tag-input.tags {
   .ng2-tag-input__text-input {
     height: 36px;
   }
+
   tag {
     color: #fff;
     background-color: #17a2b8;
@@ -116,12 +119,14 @@ tag-input#tags {
 
     delete-icon {
       height: 24px;
+
       &:before {
         content: '⨯';
         font-size: 18px;
         line-height: 24px;
         font-weight: bold;
       }
+
       span {
         display: none;
       }
@@ -147,4 +152,33 @@ tag-input#tags {
   font-size: 12px;
 }
 
+.loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+
+  span {
+    position: fixed;
+    color: #17a2b8;
+    width: 75px;
+    height: 75px;
+    border-width: 13px;
+    margin: 150px 50%
+  }
+}
+
+.pre-text {
+  word-break: break-word;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: break-spaces;
+}
+
+.color-grey {
+  color: darkgray;
+}
 

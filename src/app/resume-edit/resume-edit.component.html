@@ -171,12 +171,13 @@
           <div class="form-group row">
             <label class="col-4" for="tags">Выберите ключевые навыки/технологии: <span class="star-required">*</span></label>
             <div class="col-8">
-              <tag-input id="tags" name="tags" required [(ngModel)]="resume.tags" #fTags="ngModel"
+              <tag-input class="tags" id="tags" name="tags" required [(ngModel)]="resume.tags" #fTags="ngModel"
                          (onAdd)="onAddTag($event)"
                          [placeholder]="'+ добавить еще'" [secondaryPlaceholder]="'Начните вводить текст'">
                 <tag-input-dropdown [autocompleteItems]="tags">
                 </tag-input-dropdown>
               </tag-input>
+              <div class="mt-1 color-grey">Примечание: поле подразумевает ввод тегов. Нажмите enter для ввода значения.</div>
               <div *ngIf="fTags.invalid && (fTags.dirty || fTags.touched)" class="alert">
                 <div *ngIf="fTags.errors?.required">Поле Ключевые навыки обязательно для заполнения</div>
               </div>
@@ -226,7 +227,13 @@
                 </div>
                 <div class="col-4">
                   окончание:<span class="star-required">*</span>
-                  <app-date-picker required name="d-{{i}}-end" [(ngModel)]="fields.endDate"></app-date-picker>
+                  <app-date-picker *ngIf="!fields.untilNow" required name="d-{{i}}-end" [(ngModel)]="fields.endDate"></app-date-picker>
+                  <div class="pl-4 mt-1">
+                    <input class="form-check-input" type="checkbox" [checked]="fields.untilNow" (change)="fields.untilNowValue = !fields.untilNowValue" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      По настоящее время
+                    </label>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
@@ -283,12 +290,13 @@
               <div class="form-group row">
                 <label class="col-4" for="tags-projects-{{i}}">Выберите технологии: <span class="star-required">*</span></label>
                 <div class="col-8">
-                  <tag-input required id="tags-projects-{{i}}" [(ngModel)]="fields.tags" name="tags-projects-{{i}}"
+                  <tag-input class="tags" required id="tags-projects-{{i}}" [(ngModel)]="fields.tags" name="tags-projects-{{i}}"
                              (onAdd)="onAddTag($event)" [placeholder]="'+ добавить еще'" #lanitTags="ngModel"
                              [secondaryPlaceholder]="'Начните вводить текст'">
                     <tag-input-dropdown [autocompleteItems]="tags">
                     </tag-input-dropdown>
                   </tag-input>
+                  <div class="mt-1 color-grey">Примечание: поле подразумевает ввод тегов. Нажмите enter для ввода значения.</div>
                   <div *ngIf="lanitTags.invalid && (lanitTags.dirty || lanitTags.touched)" class="alert">
                     <div *ngIf="lanitTags.errors?.required">Поле Технологии обязательно для заполнения
                     </div>
@@ -303,11 +311,13 @@
         </div>
         <div class="d-flex justify-content-end mt-5">
           <button [disabled]="!form.form.valid" type="submit" class="btn d-flex align-items-center btn-primary btn-lg">
-            <span *ngIf="isSending" class="spinner-border spinner-border-sm mr-2"></span>
             Сохранить резюме
           </button>
         </div>
       </form>
     </div>
   </div>
+</div>
+<div class="loading" *ngIf="isSending">
+  <span class="spinner-border spinner-border-sm mr-2"></span>
 </div>

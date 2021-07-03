@@ -13,10 +13,22 @@ import {getDurationString} from '@app/helpers';
 export class CommonExperience {
   beginDate: string = '';
   endDate: string = '';
+  untilNow: boolean = false;
   @Type(() => Company)
   company: Company = new Company();
   position: string = '';
   description: string = '';
+
+  get untilNowValue(): boolean {
+    return this.untilNow;
+  }
+
+  set untilNowValue(value: boolean) {
+    this.untilNow = value;
+    if (!value) {
+      this.endDate = null;
+    }
+  }
 
   /**
    * Получение корректной даты начала
